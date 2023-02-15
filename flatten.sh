@@ -5,5 +5,5 @@
 # @Last Modified time: 2020-06-30 00:12:56
 
 rm main.js
-cat src/lib/*.js >> main.js
+cat src/lib/**/*.js >> main.js
 cat src/*.js >> main.js
