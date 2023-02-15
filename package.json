@@ -1,0 +1,22 @@
+{
+  "name": "screeps-rover",
+  "version": "1.0.0",
+  "description": "Screeps ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coteyr/screeps-rover.git"
+  },
+  "author": "Robert D. Cotey II",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coteyr/screeps-rover/issues"
+  },
+  "homepage": "https://github.com/coteyr/screeps-rover#readme",
+  "devDependencies": {
+    "eslint": "^8.34.0"
+  }
+}
