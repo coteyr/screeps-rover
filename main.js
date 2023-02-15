@@ -1,3 +1,6 @@
 module.exports.loop = function() {
- console.log(Game.time)
+  _.forEach(Game.rooms, function(room){
+    let roomLevel = require('RoomLevels/1')
+    roomLevel.run(room)
+  })
 }
