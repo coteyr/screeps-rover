@@ -78,7 +78,7 @@ class Bootstrap {
   choose_source() {
     let least_used = _.min(this.creep.room.find(FIND_SOURCES), function(source) {
       return _.filter(Game.creeps, function(creep) {
-        return creep.my && creep.pos.roomName == source.room.name && creep.target.id === source.id
+        return creep.my && creep.pos.roomName == source.room.name && creep.target?.id === source.id
       }).length
     })
     return least_used
