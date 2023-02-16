@@ -35,6 +35,9 @@ class Bootstrap {
     } else {
       this.upgradeController()
     }
+    if(!this.target) {
+      this.target = this.choose_source()
+    }
   }
 
   get task() {
@@ -46,11 +49,11 @@ class Bootstrap {
       return 'upgrade'
     } else if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0) {
       this.task = 'mine'
-      this.choose_source()
+      this.target = this.choose_source()
       return 'mine'
     } else {
       this.task = 'mine'
-      this.choose_source()
+      this.target = this.choose_source()
       return 'mine'
     }
   }
