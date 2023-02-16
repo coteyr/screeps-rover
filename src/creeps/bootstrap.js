@@ -1,6 +1,10 @@
 class Bootstrap {
   constructor(creep) {
-    console.log(`Running Bootstrap for ${creep.name}`)
+    this.creep = creep
+  }
+
+  run() {
+    console.log(`Running Bootstrap for ${this.creep.name}`)
   }
 }
 

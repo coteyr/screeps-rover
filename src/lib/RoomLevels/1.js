@@ -1,4 +1,5 @@
-// eslint-disable-next-line no-unused-vars
+/* global Bootstrap */
+
 class RoomLevel1 {
   static run(room) {
     console.log(`tarting Tick for room: ${room.name}`)
@@ -10,7 +11,15 @@ class RoomLevel1 {
         spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${Game.tick}`)
       }
     })
+    let creeps = _.filter(Game.creeps, function(creep) {
+      return creep.my && creep.pos.roomName == room.name
+    })
+    _.forEach(creeps, function(creep) {
+      let screep = Bootstrap.new(creep)
+      screep.run()
+    })
 
   }
 }
 
+module.exports.RoomLevel1 = RoomLevel1
