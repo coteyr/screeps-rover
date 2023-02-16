@@ -15,7 +15,7 @@ class RoomLevel1 {
       return creep.my && creep.pos.roomName == room.name
     })
     _.forEach(creeps, function(creep) {
-      let screep = Bootstrap.new(creep)
+      let screep = new Bootstrap(creep)
       screep.run()
     })
 
