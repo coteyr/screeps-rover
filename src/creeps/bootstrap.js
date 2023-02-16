@@ -22,19 +22,19 @@ class Bootstrap {
   }
 
   get task() {
-    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.memory['task']) {
-      return this.memory['task']
+    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.task) {
+      return this.task
     } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
-      this.creep.task = 'upgrade'
+      this.task = 'upgrade'
       return 'upgrade'
     } else {
-      this.creep.task = 'mine'
+      this.task = 'mine'
       return 'mine'
     }
   }
 
   set task(value) {
-    this.memory['task'] = value
+    this.memory.task = value
   }
 
   get memory() {
