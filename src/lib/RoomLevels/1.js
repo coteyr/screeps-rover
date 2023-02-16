@@ -8,7 +8,7 @@ class RoomLevel1 {
     })
     _.forEach(spawns, function(spawn) {
       if(spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
-        spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${Game.tick}`)
+        spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${room.name}-${Game.time}`)
       }
     })
     let creeps = _.filter(Game.creeps, function(creep) {
