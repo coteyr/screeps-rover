@@ -23,6 +23,17 @@ class RoomLevel1 {
 }
 
 module.exports.RoomLevel1 = RoomLevel1
+class Bootstrap {
+  constructor(creep) {
+    this.creep = creep
+  }
+
+  run() {
+    console.log(`Running Bootstrap for ${this.creep.name}`)
+  }
+}
+
+module.exports.bootstrap = Bootstrap
 /* global RoomLevel1 */
 
 module.exports.loop = function() {
