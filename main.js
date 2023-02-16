@@ -31,12 +31,12 @@ class Bootstrap {
 
   run() {
     if(this.task === 'mine') {
+      if(!this.target) {
+        this.target = this.choose_source()
+      }
       this.harvest()
     } else {
       this.upgradeController()
-    }
-    if(!this.target) {
-      this.target = this.choose_source()
     }
   }
 
@@ -47,13 +47,11 @@ class Bootstrap {
       this.task = 'upgrade'
       this.target = this.creep.room.controller
       return 'upgrade'
-    } else if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0) {
+    } else if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0) {
       this.task = 'mine'
-      this.target = this.choose_source()
       return 'mine'
     } else {
       this.task = 'mine'
-      this.target = this.choose_source()
       return 'mine'
     }
   }
