@@ -22,7 +22,7 @@ class Bootstrap {
   }
 
   get task() {
-    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.task) {
+    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.creep.memory.task) {
       return this.creep.memory.task
     } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
       this.task = 'upgrade'
