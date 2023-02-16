@@ -29,16 +29,10 @@ class Bootstrap {
   }
 
   run() {
-    let creep = this.creep
-
     if(this.task === 'mine') {
-      if(creep.harvest(this.target) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(this.target)
-      }
+      this.harvest()
     } else {
-      if(creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(creep.room.controller)
-      }
+      this.upgradeController()
     }
   }
 
@@ -52,6 +46,9 @@ class Bootstrap {
     } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
       this.task = 'upgrade'
       return 'upgrade'
+    } else if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) == 0) {
+      this.task = 'mine'
+      return 'mine'
     } else {
       this.task = 'mine'
       return 'mine'
@@ -64,6 +61,22 @@ class Bootstrap {
 
   get memory() {
     return this.creep.memory
+  }
+
+  harvest() {
+    if(this.creep.harvest(this.target) === ERR_NOT_IN_RANGE) {
+      this.moveTo()
+    }
+  }
+
+  moveTo() {
+    this.creep.moveTo(this.target)
+  }
+
+  upgradeController() {
+    if(this.creep.upgradeController(this.creep.room.controller) === ERR_NOT_IN_RANGE) {
+      this.creep.moveTo(this.creep.room.controller)
+    }
   }
 }
 
