@@ -7,8 +7,8 @@ class Bootstrap {
     let creep = this.creep
 
     if(this.task === 'mine') {
-      if(creep.harvest(creep.target) === ERR_NOT_IN_RANGE) {
-        creep.moveTo(creep.target)
+      if(creep.harvest(this.target) === ERR_NOT_IN_RANGE) {
+        creep.moveTo(this.target)
       }
     } else {
       if(creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
