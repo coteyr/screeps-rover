@@ -31,7 +31,7 @@ class Bootstrap {
   run() {
     let creep = this.creep
 
-    if(creep.task === 'mine') {
+    if(this.task === 'mine') {
       if(creep.harvest(creep.target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(creep.target)
       }
@@ -53,7 +53,6 @@ class Bootstrap {
       this.task = 'upgrade'
       return 'upgrade'
     } else {
-      console.log('mine')
       this.task = 'mine'
       return 'mine'
     }
