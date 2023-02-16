@@ -6,7 +6,7 @@ class Bootstrap {
   run() {
     let creep = this.creep
 
-    if(creep.store.getFreeCapacity([RESOURCE_ENERGY]) > 0) {
+    if(creep.task === 'mine') {
       if(creep.harvest(creep.target) === ERR_NOT_IN_RANGE) {
         creep.moveTo(creep.target)
       }
@@ -19,6 +19,26 @@ class Bootstrap {
 
   get target() {
     return _.first(this.creep.room.find(FIND_SOURCES))
+  }
+
+  get task() {
+    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.memory['task']) {
+      return this.memory['task']
+    } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
+      this.creep.task = 'upgrade'
+      return 'upgrade'
+    } else {
+      this.creep.task = 'mine'
+      return 'mine'
+    }
+  }
+
+  set task(value) {
+    this.memory['task'] = value
+  }
+
+  get memory() {
+    return this.creep.memory
   }
 }
 
