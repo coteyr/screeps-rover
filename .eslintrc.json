@@ -30,6 +30,10 @@
     },
     "globals": {
       "Game": "readonly",
-      "_": "readonly"
+      "_": "readonly",
+      "RESOURCE_ENERGY": "readonly",
+      "MOVE": "readonly",
+      "CARRY": "readonly",
+      "WORK": "readonly"
     }
 }
