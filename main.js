@@ -79,7 +79,7 @@ class Bootstrap {
     let least = 1000
     let result = null
     _.each(this.creep.room.find(FIND_SOURCES), s => {
-      let count = _.filter(Game.creeps, c => {return c.my  && c.memory.target.id === s.id}).length
+      let count = _.filter(Game.creeps, c => {return c.my  && c.memory.target === s.id}).length
       if (count <= least){
         least = count
         result = s
