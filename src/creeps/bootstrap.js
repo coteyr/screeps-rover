@@ -28,6 +28,7 @@ class Bootstrap {
       this.task = 'upgrade'
       return 'upgrade'
     } else {
+      console.log('mine')
       this.task = 'mine'
       return 'mine'
     }
