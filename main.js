@@ -29,7 +29,18 @@ class Bootstrap {
   }
 
   run() {
-    console.log(`Running Bootstrap for ${this.creep.name}`)
+    let creep = this.creep
+    let source = _.first(creep.room.find(FIND_SOURCES))
+
+    if(creep.store.getFreeCapacity([RESOURCE_ENERGY]) > 0) {
+      if(creep.harvest(source) === ERR_NOT_IN_RANGE) {
+        creep.moveTo(source)
+      }
+    } else {
+      if(creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
+        creep.moveTo(creep.room.controller)
+      }
+    }
   }
 }
 

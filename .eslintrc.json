@@ -34,6 +34,8 @@
       "RESOURCE_ENERGY": "readonly",
       "MOVE": "readonly",
       "CARRY": "readonly",
-      "WORK": "readonly"
+      "WORK": "readonly",
+      "FIND_SOURCES": "readonly",
+      "ERR_NOT_IN_RANGE": "readonly"
     }
 }
