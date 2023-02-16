@@ -76,12 +76,16 @@ class Bootstrap {
   }
 
   choose_source() {
-    let least_used = _.min(this.creep.room.find(FIND_SOURCES), function(source) {
-      return _.filter(Game.creeps, function(creep) {
-        return creep.my && creep.pos.roomName == source.room.name && creep.target &&creep.target.id === source.id
-      }).length
+    let least = 1000
+    let result = null
+    _.each(this.creep.room.find(FIND_SOURCES), s => {
+      let count = _.filter(Game.creeps, c => {return c.my  && c.memory.target.id === s.id}).length
+      if (count <= least){
+        least = count
+        result = s
+      }
     })
-    return least_used
+    return result
   }
 
   harvest() {
