@@ -2,7 +2,7 @@
 
 class RoomLevel1 {
   static run(room) {
-    console.log(`tarting Tick for room: ${room.name}`)
+    console.log(`Starting Tick for room: ${room.name}`)
     let spawns = _.filter(Game.spawns, function(spawn) {
       return spawn.pos.roomName === room.name
     })

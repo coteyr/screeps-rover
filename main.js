@@ -2,7 +2,7 @@
 
 class RoomLevel1 {
   static run(room) {
-    console.log(`tarting Tick for room: ${room.name}`)
+    console.log(`Starting Tick for room: ${room.name}`)
     let spawns = _.filter(Game.spawns, function(spawn) {
       return spawn.pos.roomName === room.name
     })
@@ -24,9 +24,44 @@ class RoomLevel1 {
 }
 
 module.exports.RoomLevel1 = RoomLevel1
-class Bootstrap {
+
+class BaseCreep {
   constructor(creep) {
     this.creep = creep
+  }
+
+  set task(value) {
+    if(this.creep.memory.task !== value) {
+      this.creep.memory.task = value
+      this.target = null
+    }
+
+  }
+
+  get memory() {
+    return this.creep.memory
+  }
+
+  get target() {
+    let id = this.creep.memory.target
+    return Game.getObjectById(id)
+  }
+
+  set target(value) {
+    if(value === null) {
+      this.creep.memory.target = null
+    } else {
+      this.creep.memory.target = value.id
+    }
+  }
+}
+
+module.exports.creeps_base = BaseCreep
+/* global BaseCreep */
+
+class Bootstrap extends BaseCreep {
+  constructor(creep) {
+    super(creep)
   }
 
   run() {
@@ -57,65 +92,29 @@ class Bootstrap {
     }
   }
 
-  set task(value) {
-    if(this.creep.memory.task !== value) {
-      this.creep.memory.task = value
-      this.target = null
-    }
-
-  }
-
-  get memory() {
-    return this.creep.memory
-  }
-
-  validate_target() {
-
-  }
-  get target() {
-    let id = this.creep.memory.target
-    return Game.getObjectById(id)
-  }
-
-  set target(value) {
-    if(value === null) {
-      this.creep.memory.target = null
-    } else {
-      this.creep.memory.target = value.id
-    }
-  }
-
   choose_source() {
+    return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
+  }
+
+}
+
+module.exports.bootstrap = Bootstrap
+class Math {
+  static fewest_targeting(objects, creeps) {
     let least = 1000
     let result = null
-    _.each(this.creep.room.find(FIND_SOURCES), s => {
-      let count = _.filter(Game.creeps, c => {return c.my  && c.memory.target === s.id}).length
+    _.each(objects, o => {
+      let count = _.filter(creeps, c => {return c.my  && c.memory.target === o.id}).length
       if (count <= least){
         least = count
-        result = s
+        result = o
       }
     })
     return result
   }
-
-  harvest() {
-    if(this.creep.harvest(this.target) === ERR_NOT_IN_RANGE) {
-      this.moveTo()
-    }
-  }
-
-  moveTo() {
-    this.creep.moveTo(this.target)
-  }
-
-  upgradeController() {
-    if(this.creep.upgradeController(this.creep.room.controller) === ERR_NOT_IN_RANGE) {
-      this.creep.moveTo(this.creep.room.controller)
-    }
-  }
 }
 
-module.exports.bootstrap = Bootstrap
+module.exports.math = Math
 /* global RoomLevel1 */
 
 module.exports.loop = function() {

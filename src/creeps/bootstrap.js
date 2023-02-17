@@ -1,6 +1,8 @@
-class Bootstrap {
+/* global BaseCreep */
+
+class Bootstrap extends BaseCreep {
   constructor(creep) {
-    this.creep = creep
+    super(creep)
   }
 
   run() {
@@ -31,62 +33,10 @@ class Bootstrap {
     }
   }
 
-  set task(value) {
-    if(this.creep.memory.task !== value) {
-      this.creep.memory.task = value
-      this.target = null
-    }
-
-  }
-
-  get memory() {
-    return this.creep.memory
-  }
-
-  validate_target() {
-
-  }
-  get target() {
-    let id = this.creep.memory.target
-    return Game.getObjectById(id)
-  }
-
-  set target(value) {
-    if(value === null) {
-      this.creep.memory.target = null
-    } else {
-      this.creep.memory.target = value.id
-    }
-  }
-
   choose_source() {
-    let least = 1000
-    let result = null
-    _.each(this.creep.room.find(FIND_SOURCES), s => {
-      let count = _.filter(Game.creeps, c => {return c.my  && c.memory.target === s.id}).length
-      if (count <= least){
-        least = count
-        result = s
-      }
-    })
-    return result
+    return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
 
-  harvest() {
-    if(this.creep.harvest(this.target) === ERR_NOT_IN_RANGE) {
-      this.moveTo()
-    }
-  }
-
-  moveTo() {
-    this.creep.moveTo(this.target)
-  }
-
-  upgradeController() {
-    if(this.creep.upgradeController(this.creep.room.controller) === ERR_NOT_IN_RANGE) {
-      this.creep.moveTo(this.creep.room.controller)
-    }
-  }
 }
 
 module.exports.bootstrap = Bootstrap
