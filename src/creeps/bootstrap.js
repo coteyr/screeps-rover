@@ -52,7 +52,11 @@ class Bootstrap {
   }
 
   set target(value) {
-    this.creep.memory.target = value.id
+    if(value === null) {
+      this.creep.memory.target = null
+    } else {
+      this.creep.memory.target = value.id
+    }
   }
 
   choose_source() {
