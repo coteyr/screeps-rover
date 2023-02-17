@@ -5,7 +5,25 @@ class Bootstrap extends BaseCreep {
     super(creep)
   }
 
+  set_task() {
+    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) > 0 && this.creep.memory.task) {
+      return null
+    } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
+      this.task = 'upgrade'
+      this.target = this.creep.room.controller
+    } else if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0) {
+      this.task = 'mine'
+    } else {
+      this.task = 'mine'
+    }
+  }
+
+  choose_source() {
+    return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
+  }
+
   run() {
+    this.set_task()
     if(this.task === 'mine') {
       if(!this.target) {
         this.target = this.choose_source()
@@ -15,26 +33,6 @@ class Bootstrap extends BaseCreep {
       this.target = this.creep.room.controller
       this.upgradeController()
     }
-  }
-
-  get task() {
-    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) > 0 && this.creep.memory.task) {
-      return this.creep.memory.task
-    } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
-      this.task = 'upgrade'
-      this.target = this.creep.room.controller
-      return 'upgrade'
-    } else if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0) {
-      this.task = 'mine'
-      return 'mine'
-    } else {
-      this.task = 'mine'
-      return 'mine'
-    }
-  }
-
-  choose_source() {
-    return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
 
 }

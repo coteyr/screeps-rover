@@ -4,6 +4,10 @@ class BaseCreep {
     this.creep = creep
   }
 
+  get task() {
+    return this.creep.memory.task
+  }
+
   set task(value) {
     if(this.creep.memory.task !== value) {
       this.creep.memory.task = value
