@@ -28,6 +28,22 @@ class BaseCreep {
       this.creep.memory.target = value.id
     }
   }
+
+  harvest() {
+    if(this.creep.harvest(this.target) === ERR_NOT_IN_RANGE) {
+      this.moveTo()
+    }
+  }
+
+  moveTo() {
+    this.creep.moveTo(this.target)
+  }
+
+  upgradeController() {
+    if(this.creep.upgradeController(this.creep.room.controller) === ERR_NOT_IN_RANGE) {
+      this.creep.moveTo(this.creep.room.controller)
+    }
+  }
 }
 
 module.exports.creeps_base = BaseCreep
