@@ -10,12 +10,13 @@ class Bootstrap {
       }
       this.harvest()
     } else {
+      this.target = this.creep.room.controller
       this.upgradeController()
     }
   }
 
   get task() {
-    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.creep.memory.task) {
+    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) > 0 && this.creep.memory.task) {
       return this.creep.memory.task
     } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
       this.task = 'upgrade'
@@ -31,13 +32,20 @@ class Bootstrap {
   }
 
   set task(value) {
-    this.creep.memory.task = value
+    if(this.creep.memory.task !== value) {
+      this.creep.memory.task = value
+      this.target = null
+    }
+
   }
 
   get memory() {
     return this.creep.memory
   }
 
+  validate_target() {
+
+  }
   get target() {
     let id = this.creep.memory.target
     return Game.getObjectById(id)
