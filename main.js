@@ -41,6 +41,10 @@ class RoomLevel0 {
     return this.room.find(FIND_MY_STRUCTURES)
   }
 
+  get sources() {
+    return this.room.find(FIND_SOURCES)
+  }
+
   build_extensions() {
     let max_extensions = [0, 5, 10, 20, 30, 40, 50, 60][this.room.controller.level - 1]
     if (this.extensions >= max_extensions) {
@@ -67,8 +71,7 @@ class RoomLevel0 {
       })
       return Math.lowest(ranges)
     })
-    console.log(_.first(spots).x)
-    console.log(_.first(spots).y)
+
     let location = null
 
     _.each(spots, s => {
@@ -83,6 +86,7 @@ class RoomLevel0 {
           return false
         }
       })
+
 
       _.each(this.sources, o => {
         if (o.pos.inRangeTo(s.x, s.y, 2)) {
