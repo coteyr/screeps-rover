@@ -65,11 +65,9 @@ class RoomLevel0 {
         let pos = new RoomPosition(s.x, s.y, this.room.name)
         ranges.push(pos.getRangeTo(o.pos))
       })
-      console.log(ranges)
-      console.log(Math.lowest(ranges))
       return Math.lowest(ranges)
     })
-
+    console.log(spots)
     let location = null
 
     _.each(spots, s => {
@@ -88,6 +86,9 @@ class RoomLevel0 {
           return
         }
       })
+
+      // not near wall
+      // not near construction spot
 
       if(passed){
         location = s
