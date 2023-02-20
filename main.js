@@ -12,12 +12,12 @@ class RoomLevel0 {
     return _.filter(Game.creeps, c => { return c.my && c.pos.roomName === this.room.name})
   }
 
-  run(room) {
-    console.log(`Starting Tick for room: ${room.name}`)
+  run() {
+    console.log(`Starting Tick for room: ${this.room.name}`)
 
     _.forEach(this.spawns, spawn => {
       if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
-        spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${room.name}-${Game.time}`)
+        spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${this.room.name}-${Game.time}`)
       }
     })
   }
@@ -52,10 +52,19 @@ class RoomLevel2 extends RoomLevel0 {
 
 module.exports.RoomLevel1 = RoomLevel2
 /* global RoomLevel0 */
+/* global Bootstrap */
 
 class RoomLevel3 extends RoomLevel0 {
-  static run(room) {
+  run(room) {
     super.run(room)
+    this.run_creeps()
+  }
+
+  run_creeps() {
+    _.forEach(this.creeps, function(creep) {
+      let screep = new Bootstrap(creep)
+      screep.run()
+    })
   }
 }
 
