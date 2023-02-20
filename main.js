@@ -337,7 +337,7 @@ class Bootstrap extends BaseCreep {
       }
       this.harvest()
     } else {
-      this.target = this.controller
+      this.target = this.room.controller
       this.upgradeController()
     }
   }
