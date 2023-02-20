@@ -1,38 +1,65 @@
-/* global Bootstrap */
-
 class RoomLevel0 {
-  static run(room) {
+  constructor(room) {
+    this.room = room
+  }
+
+
+  get spawns() {
+    return _.filter(Game.spawns, s => { return s.my && s.pos.roomName === this.room.name })
+  }
+
+  get creeps() {
+    return _.filter(Game.creeps, c => { return c.my && c.pos.roomName === this.room.name})
+  }
+
+  run(room) {
     console.log(`Starting Tick for room: ${room.name}`)
-    let spawns = _.filter(Game.spawns, function(spawn) {
-      return spawn.pos.roomName === room.name
-    })
-    let creeps = _.filter(Game.creeps, function(creep) {
-      return creep.my && creep.pos.roomName == room.name
-    })
-    _.forEach(spawns, function(spawn) {
-      if(creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
+
+    _.forEach(this.spawns, spawn => {
+      if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
         spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${room.name}-${Game.time}`)
       }
     })
-
-    _.forEach(creeps, function(creep) {
-      let screep = new Bootstrap(creep)
-      screep.run()
-    })
-
   }
 }
 
 module.exports.RoomLevel0 = RoomLevel0
 /* global RoomLevel0 */
+/* global Bootstrap */
 
 class RoomLevel1 extends RoomLevel0 {
+  run(room) {
+    super.run(room)
+    this.run_creeps()
+  }
+
+  run_creeps() {
+    _.forEach(this.creeps, function(creep) {
+      let screep = new Bootstrap(creep)
+      screep.run()
+    })
+  }
+}
+
+module.exports.RoomLevel1 = RoomLevel1
+/* global RoomLevel0 */
+
+class RoomLevel2 extends RoomLevel0 {
   static run(room) {
     super.run(room)
   }
 }
 
-module.exports.RoomLevel1 = RoomLevel1
+module.exports.RoomLevel1 = RoomLevel2
+/* global RoomLevel0 */
+
+class RoomLevel3 extends RoomLevel0 {
+  static run(room) {
+    super.run(room)
+  }
+}
+
+module.exports.RoomLevel1 = RoomLevel3
 
 class BaseCreep {
   constructor(creep) {
@@ -159,9 +186,29 @@ class Math {
 
 module.exports.math = Math
 /* global RoomLevel1 */
+/* global RoomLevel2 */
+/* global RoomLevel3 */
 
 module.exports.loop = function() {
   _.forEach(Game.rooms, function(room){
-    RoomLevel1.run(room)
+    let sroom = null
+    if(room.controller.my) {
+      switch(room.controller.level) {
+      case 1:
+        sroom = new RoomLevel1(room)
+        break
+      case 2:
+        sroom = new RoomLevel2(room)
+        break
+      case 3:
+        sroom = new RoomLevel3(room)
+        break
+      default:
+        sroom = new RoomLevel1(room)
+      }
+    } else {
+      // hostel room
+    }
+    sroom.run()
   })
 }

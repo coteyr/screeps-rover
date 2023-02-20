@@ -1,25 +1,25 @@
-/* global Bootstrap */
-
 class RoomLevel0 {
-  static run(room) {
+  constructor(room) {
+    this.room = room
+  }
+
+
+  get spawns() {
+    return _.filter(Game.spawns, s => { return s.my && s.pos.roomName === this.room.name })
+  }
+
+  get creeps() {
+    return _.filter(Game.creeps, c => { return c.my && c.pos.roomName === this.room.name})
+  }
+
+  run(room) {
     console.log(`Starting Tick for room: ${room.name}`)
-    let spawns = _.filter(Game.spawns, function(spawn) {
-      return spawn.pos.roomName === room.name
-    })
-    let creeps = _.filter(Game.creeps, function(creep) {
-      return creep.my && creep.pos.roomName == room.name
-    })
-    _.forEach(spawns, function(spawn) {
-      if(creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
+
+    _.forEach(this.spawns, spawn => {
+      if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
         spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${room.name}-${Game.time}`)
       }
     })
-
-    _.forEach(creeps, function(creep) {
-      let screep = new Bootstrap(creep)
-      screep.run()
-    })
-
   }
 }
 
