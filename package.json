@@ -18,5 +18,8 @@
   "homepage": "https://github.com/coteyr/screeps-rover#readme",
   "devDependencies": {
     "eslint": "^8.34.0"
+  },
+  "dependencies": {
+    "documentation": "^14.0.1"
   }
 }

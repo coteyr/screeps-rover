@@ -1,9 +1,16 @@
+/**
+ * This is the base class for all Rooms
+ * @param {room} the room to be processed
+ */
 class RoomLevel0 {
   constructor(room) {
     this.room = room
   }
 
-
+  /**
+   * My spawns
+   * @returns spawns in a room owned by me
+   */
   get spawns() {
     return _.filter(Game.spawns, s => { return s.my && s.pos.roomName === this.room.name })
   }
