@@ -79,10 +79,8 @@ class RoomLevel0 {
       let pos = new RoomPosition(s.x, s.y, this.room.name)
       let passed = true
       _.each(this.structures, u =>{
-        if (pos.getRangeTo(u) <= 2) {
+        if (pos.getRangeTo(u) <= 1) {
           passed = false
-          console.log('failed: structure')
-          console.log(pos.getRangeTo(u))
           return false
         }
       })
@@ -91,11 +89,17 @@ class RoomLevel0 {
       _.each(this.sources, o => {
         if (o.pos.inRangeTo(s.x, s.y, 2)) {
           passed = false
-          console.log('failed: source')
-          console.log(pos.getRangeTo(o))
           return false
         }
       })
+
+      _.each(this.construction_sites, c => {
+        if (c.pos.inRangeTo(s.x, s.y, 1)) {
+          passed = false
+          return false
+        }
+      })
+
 
       // not near wall
       // not near construction spot
