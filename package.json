@@ -20,7 +20,6 @@
     "eslint": "^8.34.0"
   },
   "dependencies": {
-    "documentation": "^14.0.1",
-    "http-server": "^14.1.1"
+    "documentation": "^14.0.1"
   }
 }
