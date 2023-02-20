@@ -1,27 +1,21 @@
 class Math {
   static fewest_targeting(objects, creeps) {
-    let least = 1000
-    let result = null
-    _.each(objects, o => {
-      let count = _.filter(creeps, c => {return c.my  && c.memory.target === o.id}).length
-      if (count <= least){
-        least = count
-        result = o
-      }
-    })
-    return result
+    return _.last(this.order_by_targeting(objects, creeps))
   }
 
-  static lowest(arry) {
-    let least = 1000000
-    let result = null
-    _.each(arry, a => {
-      if(a < least) {
-        least = a
-        result = a
-      }
+  static most_targeting(objects, creeps) {
+    return _.first(this.order_by_targeting(objects, creeps))
+  }
+
+  static order_by_targeting(objects, creeps) {
+    _.sortBy(objects, o => {
+      return _.filter(creeps, c => { return c.my && c.memory.target === o.id }).length
     })
-    return result
+  }
+
+
+  static lowest(arry) {
+    _.last(_.sortBy(arry, a => { return a }))
   }
 }
 

@@ -1,3 +1,5 @@
+/* global Bootstrap */
+
 /**
  * This is the base class for all Rooms
  * @param {room} the room to be processed
@@ -21,11 +23,20 @@ class RoomLevel0 {
 
   run() {
     console.log(`Starting Tick for room: ${this.room.name}`)
+  }
 
+  run_spawns() {
     _.forEach(this.spawns, spawn => {
       if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
         spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${this.room.name}-${Game.time}`)
       }
+    })
+  }
+
+  run_creeps() {
+    _.forEach(this.creeps, function(creep) {
+      let screep = new Bootstrap(creep)
+      screep.run()
     })
   }
 
@@ -51,6 +62,10 @@ class RoomLevel0 {
 
   get max_extensions() {
     return [0, 5, 10, 20, 30, 40, 50, 60][this.room.controller.level - 1]
+  }
+
+  get builders(){
+    return _.filter(this.creeps, c => { return c.memory.type === 'builder' })
   }
 
   build_extensions() {
@@ -138,19 +153,12 @@ class RoomLevel0 {
 
 module.exports.RoomLevel0 = RoomLevel0
 /* global RoomLevel0 */
-/* global Bootstrap */
 
 class RoomLevel1 extends RoomLevel0 {
   run(room) {
     super.run(room)
+    this.run_spawns()
     this.run_creeps()
-  }
-
-  run_creeps() {
-    _.forEach(this.creeps, function(creep) {
-      let screep = new Bootstrap(creep)
-      screep.run()
-    })
   }
 }
 
@@ -158,31 +166,56 @@ module.exports.RoomLevel1 = RoomLevel1
 /* global RoomLevel0 */
 
 class RoomLevel2 extends RoomLevel0 {
-  static run(room) {
+  run(room) {
     super.run(room)
+    this.run_spawns()
+    this.run_creeps()
   }
 }
 
 module.exports.RoomLevel1 = RoomLevel2
+
 /* global RoomLevel0 */
 /* global Bootstrap */
+/* global Builder */
 
 class RoomLevel3 extends RoomLevel0 {
   run(room) {
     super.run(room)
+    this.run_spawns()
     this.run_creeps()
     this.run_builds()
   }
 
   run_creeps() {
     _.forEach(this.creeps, function(creep) {
-      let screep = new Bootstrap(creep)
+      let screep = null
+      switch(creep.memory.type) {
+      case 'builder':
+        screep = new Builder(creep)
+        break
+      default:
+        screep = new Bootstrap(creep)
+      }
       screep.run()
     })
   }
 
   run_builds() {
     this.build_extensions()
+  }
+
+  run_spawns() {
+    _.forEach(this.spawns, spawn => {
+      if(this.builders.length < 2 && spawn.store[RESOURCE_ENERGY] >= 300 && !spawn.spawning) {
+        spawn.spawnCreep([WORK, WORK, MOVE, MOVE, CARRY, CARRY], `builder-${this.room.name}-${Game.time}`, { memory: { type: 'buiilder' } })
+      }
+      if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
+        spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
+      }
+    })
+
+    super.run_spawns()
   }
 }
 
@@ -248,8 +281,18 @@ class BaseCreep {
     return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
 
+  choose_construction_site() {
+    return Math.most_targeting(this.creep.room.find(FIND_MY_CONSTRUCTION_SITES), Game.creeps)
+  }
+
   harvest() {
     if(this.creep.harvest(this.target) === ERR_NOT_IN_RANGE) {
+      this.moveTo()
+    }
+  }
+
+  build() {
+    if(this.creep.build(this.target) === ERR_NOT_IN_RANGE) {
       this.moveTo()
     }
   }
@@ -302,30 +345,59 @@ class Bootstrap extends BaseCreep {
 }
 
 module.exports.bootstrap = Bootstrap
-class Math {
-  static fewest_targeting(objects, creeps) {
-    let least = 1000
-    let result = null
-    _.each(objects, o => {
-      let count = _.filter(creeps, c => {return c.my  && c.memory.target === o.id}).length
-      if (count <= least){
-        least = count
-        result = o
-      }
-    })
-    return result
+/* global BaseCreep */
+
+class Builder extends BaseCreep {
+  constructor(creep) {
+    super(creep)
   }
 
-  static lowest(arry) {
-    let least = 1000000
-    let result = null
-    _.each(arry, a => {
-      if(a < least) {
-        least = a
-        result = a
+  set_task() {
+    if (!this.empty && !this.full && this.has_task) {
+      return null
+    } else if (this.full) {
+      this.task = 'build'
+    } else if (this.empty) {
+      this.task = 'mine'
+    } else {
+      this.task = 'mine'
+    }
+  }
+
+  run() {
+    this.set_task()
+    if(this.task === 'build') {
+      if(!this.target) {
+        this.target = this.choose_construction_site()
       }
+      this.build()
+    } else {
+      this.target = this.choose_source()
+      this.harvest()
+    }
+  }
+
+}
+
+module.exports.Builder = Builder
+class Math {
+  static fewest_targeting(objects, creeps) {
+    return _.last(this.order_by_targeting(objects, creeps))
+  }
+
+  static most_targeting(objects, creeps) {
+    return _.first(this.order_by_targeting(objects, creeps))
+  }
+
+  static order_by_targeting(objects, creeps) {
+    _.sortBy(objects, o => {
+      return _.filter(creeps, c => { return c.my && c.memory.target === o.id }).length
     })
-    return result
+  }
+
+
+  static lowest(arry) {
+    _.last(_.sortBy(arry, a => { return a }))
   }
 }
 

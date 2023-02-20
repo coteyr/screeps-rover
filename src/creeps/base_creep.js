@@ -59,8 +59,18 @@ class BaseCreep {
     return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
 
+  choose_construction_site() {
+    return Math.most_targeting(this.creep.room.find(FIND_MY_CONSTRUCTION_SITES), Game.creeps)
+  }
+
   harvest() {
     if(this.creep.harvest(this.target) === ERR_NOT_IN_RANGE) {
+      this.moveTo()
+    }
+  }
+
+  build() {
+    if(this.creep.build(this.target) === ERR_NOT_IN_RANGE) {
       this.moveTo()
     }
   }

@@ -1,3 +1,5 @@
+/* global Bootstrap */
+
 /**
  * This is the base class for all Rooms
  * @param {room} the room to be processed
@@ -21,11 +23,20 @@ class RoomLevel0 {
 
   run() {
     console.log(`Starting Tick for room: ${this.room.name}`)
+  }
 
+  run_spawns() {
     _.forEach(this.spawns, spawn => {
       if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
         spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${this.room.name}-${Game.time}`)
       }
+    })
+  }
+
+  run_creeps() {
+    _.forEach(this.creeps, function(creep) {
+      let screep = new Bootstrap(creep)
+      screep.run()
     })
   }
 
@@ -51,6 +62,10 @@ class RoomLevel0 {
 
   get max_extensions() {
     return [0, 5, 10, 20, 30, 40, 50, 60][this.room.controller.level - 1]
+  }
+
+  get builders(){
+    return _.filter(this.creeps, c => { return c.memory.type === 'builder' })
   }
 
   build_extensions() {
