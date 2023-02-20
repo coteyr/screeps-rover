@@ -111,7 +111,7 @@ class RoomLevel0 {
         }
       })
 
-      _.each(this.room.lookAtArea(s.x - 1, s.y - 1, s.x + 1, s.x + 1, true), o => {
+      _.each(this.room.lookAtArea(s.y - 1, s.x - 1, s.y + 1, s.x + 1, true), o => {
         if(o.type === 'terrain' && o.terrain === 'wall') {
           passed = false
           return false
