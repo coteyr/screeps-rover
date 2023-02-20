@@ -5,6 +5,7 @@ class RoomLevel3 extends RoomLevel0 {
   run(room) {
     super.run(room)
     this.run_creeps()
+    this.run_builds()
   }
 
   run_creeps() {
@@ -12,6 +13,10 @@ class RoomLevel3 extends RoomLevel0 {
       let screep = new Bootstrap(creep)
       screep.run()
     })
+  }
+
+  run_builds() {
+    this.build_extensions()
   }
 }
 

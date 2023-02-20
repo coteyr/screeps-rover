@@ -41,7 +41,7 @@ help prevent having to have `this.creep` in the child classes
 
 ## RoomLevel0
 
-[src/lib/RoomLevels/0.js:5-31][7]
+[src/lib/RoomLevels/0.js:5-114][7]
 
 This is the base class for all Rooms
 
@@ -68,8 +68,8 @@ Returns **any** spawns in a room owned by me
 
 [5]: #spawns
 
-[6]: https://github.com/coteyr/screeps-rover/blob/7de5c35395235b16eff37c2b1536f7f01d6f2561/src/creeps/base_creep.js#L8-L77 "Source code on GitHub"
+[6]: https://github.com/coteyr/screeps-rover/blob/793ca5b005c0bd732a859941973dd202545ee29e/src/creeps/base_creep.js#L8-L77 "Source code on GitHub"
 
-[7]: https://github.com/coteyr/screeps-rover/blob/7de5c35395235b16eff37c2b1536f7f01d6f2561/src/lib/RoomLevels/0.js#L5-L31 "Source code on GitHub"
+[7]: https://github.com/coteyr/screeps-rover/blob/793ca5b005c0bd732a859941973dd202545ee29e/src/lib/RoomLevels/0.js#L5-L114 "Source code on GitHub"
 
-[8]: https://github.com/coteyr/screeps-rover/blob/7de5c35395235b16eff37c2b1536f7f01d6f2561/src/lib/RoomLevels/0.js#L14-L16 "Source code on GitHub"
+[8]: https://github.com/coteyr/screeps-rover/blob/793ca5b005c0bd732a859941973dd202545ee29e/src/lib/RoomLevels/0.js#L14-L16 "Source code on GitHub"

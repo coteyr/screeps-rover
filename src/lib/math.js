@@ -11,6 +11,18 @@ class Math {
     })
     return result
   }
+
+  static lowest(arry) {
+    let least = 1000000
+    let result = null
+    _.each(arry, a => {
+      if(a < least) {
+        least = a
+        result = a
+      }
+    })
+    return result
+  }
 }
 
 module.exports.math = Math

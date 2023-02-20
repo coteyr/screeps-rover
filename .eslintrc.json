@@ -36,6 +36,10 @@
       "CARRY": "readonly",
       "WORK": "readonly",
       "FIND_SOURCES": "readonly",
-      "ERR_NOT_IN_RANGE": "readonly"
+      "ERR_NOT_IN_RANGE": "readonly",
+      "FIND_MY_STRUCTURES": "readonly",
+      "FIND_MY_CONSTRUCTION_SITES": "readonly",
+      "RoomPosition": "readonly",
+      "STRUCTURE_EXTENSION": "readonly"
     }
 }

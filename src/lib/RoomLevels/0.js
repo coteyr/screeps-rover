@@ -28,6 +28,89 @@ class RoomLevel0 {
       }
     })
   }
+
+  get extensions() {
+    return this.room.find(FIND_MY_STRUCTURES, { filter: s => { return s.structureType === STRUCTURE_EXTENSION }})
+  }
+
+  get construction_sites() {
+    return this.room.find(FIND_MY_CONSTRUCTION_SITES)
+  }
+
+  get structures() {
+    return this.room.find(FIND_MY_STRUCTURES)
+  }
+
+  build_extensions() {
+    let max_extensions = [0, 5, 10, 20, 30, 40, 50, 60][this.room.controller.level - 1]
+    if (this.extensions >= max_extensions) {
+      return null
+    }
+
+    if (this.extensions + this.construction_sites >= max_extensions) {
+      return null // This will return early if other things are being built.
+      // This is ok for now.
+    }
+
+    let spots = this.room.lookAtArea(5,5,45,45, true)
+    let sources = this.room.find(FIND_SOURCES)
+
+
+
+    spots = _.filter(spots, s => { return s.type === 'terrain' && s.terrain === 'plain'})
+    sources
+    spots = _.sortBy(spots, s => {
+      let ranges = []
+      _.each(sources,  o => {
+        let pos = new RoomPosition(s.x, s.y, this.room.name)
+        ranges.push(pos.getRangeTo(o.pos))
+      })
+
+      return Math.lowest(ranges)
+    })
+
+    let location = null
+
+    _.each(spots, s => {
+      let pos = new RoomPosition(s.x, s.y, this.room.name)
+      let passed = true
+      _.each(this.structures, u =>{
+        if (pos.getRangeTo(u) <= 1) {
+          passed = false
+          return
+        }
+      })
+
+      _.each(this.sources, o => {
+        if (pos.getRangeTo(o) <= 1) {
+          passed = false
+          return
+        }
+      })
+
+      if(passed){
+        location = s
+        return s
+      }
+
+    })
+
+    if(location){
+      this.room.createConstructionSite(location.x, location.y, STRUCTURE_EXTENSION)
+    }
+
+
+
+    // List the potentials positions (ie: all plain or swamp tiles of the room).
+    // Remove tiles which don't fit some arbitrary rules (ie: in your case, filter all tiles where (x + y) % 2 === 0 which will create a checker pattern)
+    // Score the remaining tile based, for example, on distance and keep the best one (ie: use (pos) => spawn.pos.getRangeTo(pos) function to score and keep the minimum).
+
+    // not near a source - 3
+    // not near an edge - 5
+
+
+
+  }
 }
 
 module.exports.RoomLevel0 = RoomLevel0
