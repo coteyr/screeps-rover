@@ -49,8 +49,8 @@ Returns **any** spawns in a room owned by me
 
 [5]: #spawns
 
-[6]: https://github.com/coteyr/screeps-rover/blob/0ddb33a995d0d775e533013d264f17f563a93864/src/creeps/base_creep.js#L8-L77 "Source code on GitHub"
+[6]: https://github.com/coteyr/screeps-rover/blob/ae4665f4b307ea1684cdc7b183487afa1466f84a/src/creeps/base_creep.js#L8-L77 "Source code on GitHub"
 
-[7]: https://github.com/coteyr/screeps-rover/blob/0ddb33a995d0d775e533013d264f17f563a93864/src/lib/RoomLevels/0.js#L5-L31 "Source code on GitHub"
+[7]: https://github.com/coteyr/screeps-rover/blob/ae4665f4b307ea1684cdc7b183487afa1466f84a/src/lib/RoomLevels/0.js#L5-L31 "Source code on GitHub"
 
-[8]: https://github.com/coteyr/screeps-rover/blob/0ddb33a995d0d775e533013d264f17f563a93864/src/lib/RoomLevels/0.js#L14-L16 "Source code on GitHub"
+[8]: https://github.com/coteyr/screeps-rover/blob/ae4665f4b307ea1684cdc7b183487afa1466f84a/src/lib/RoomLevels/0.js#L14-L16 "Source code on GitHub"

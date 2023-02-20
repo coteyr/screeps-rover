@@ -10,3 +10,4 @@ cat src/**/*.js >> main.js
 cat src/*.js >> main.js
 
 git add main.js
+git add README.md
