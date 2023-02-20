@@ -80,7 +80,7 @@ class RoomLevel0 {
           passed = false
           console.log('failed: structure')
           console.log(pos.getRangeTo(u))
-          return
+          return false
         }
       })
 
@@ -89,7 +89,7 @@ class RoomLevel0 {
           passed = false
           console.log('failed: source')
           console.log(pos.getRangeTo(o))
-          return
+          return false
         }
       })
 
