@@ -76,7 +76,7 @@ class RoomLevel0 {
       let pos = new RoomPosition(s.x, s.y, this.room.name)
       let passed = true
       _.each(this.structures, u =>{
-        if (pos.getRangeTo(u) <= 1) {
+        if (pos.getRangeTo(u) <= 2) {
           passed = false
           console.log('failed: structure')
           console.log(pos.getRangeTo(u))
@@ -85,7 +85,7 @@ class RoomLevel0 {
       })
 
       _.each(this.sources, o => {
-        if (pos.getRangeTo(o) <= 1) {
+        if (pos.getRangeTo(o) <= 2) {
           passed = false
           console.log('failed: source')
           console.log(pos.getRangeTo(o))
