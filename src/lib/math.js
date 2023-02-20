@@ -1,10 +1,10 @@
 class Math {
   static fewest_targeting(objects, creeps) {
-    return _.last(this.order_by_targeting(objects, creeps))
+    return _.first(this.order_by_targeting(objects, creeps))
   }
 
   static most_targeting(objects, creeps) {
-    return _.first(this.order_by_targeting(objects, creeps))
+    return _.last(this.order_by_targeting(objects, creeps))
   }
 
   static order_by_targeting(objects, creeps) {
@@ -15,7 +15,7 @@ class Math {
 
 
   static lowest(arry) {
-    _.last(_.sortBy(arry, a => { return a }))
+    _.first(_.sortBy(arry, a => { return a }))
   }
 }
 
