@@ -67,7 +67,8 @@ class RoomLevel0 {
       })
       return Math.lowest(ranges)
     })
-    console.log(spots)
+    console.log(_.first(spots).x)
+    console.log(_.first(spots).y)
     let location = null
 
     _.each(spots, s => {
