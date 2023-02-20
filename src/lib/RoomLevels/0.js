@@ -45,6 +45,10 @@ class RoomLevel0 {
     return this.room.find(FIND_SOURCES)
   }
 
+  get flags() {
+    return this.room.find(FIND_FLAGS)
+  }
+
   build_extensions() {
     let max_extensions = [0, 5, 10, 20, 30, 40, 50, 60][this.room.controller.level - 1]
     if (this.extensions >= max_extensions) {
@@ -100,10 +104,21 @@ class RoomLevel0 {
         }
       })
 
+      _.each(this.flags, f => {
+        if (f.pos.inRangeTo(s.x, s.y, 1)) {
+          passed = false
+          return false
+        }
+      })
 
-      // not near wall
-      // not near construction spot
-      // not near flag
+      _.each(this.room.lookAtArea(s.x - 1, s.y - 1, s.x + 1, s.x + 1, true), o => {
+        if(o.type === 'terrain' && o.terrain === 'wall') {
+          passed = false
+          return false
+        }
+      })
+
+
 
       if(passed){
         location = s
