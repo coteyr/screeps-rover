@@ -8,7 +8,7 @@ class Math {
   }
 
   static order_by_targeting(objects, creeps) {
-    _.sortBy(objects, o => {
+    return _.sortBy(objects, o => {
       return _.filter(creeps, c => { return c.my && c.memory.target === o.id }).length
     })
   }
