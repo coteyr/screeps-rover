@@ -85,7 +85,7 @@ class RoomLevel0 {
       })
 
       _.each(this.sources, o => {
-        if (pos.getRangeTo(o) <= 2) {
+        if (o.pos.inRangeTo(s.x, s.y, 2)) {
           passed = false
           console.log('failed: source')
           console.log(pos.getRangeTo(o))
