@@ -6,20 +6,16 @@ class Bootstrap extends BaseCreep {
   }
 
   set_task() {
-    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) > 0 && this.creep.memory.task) {
+    if (!this.empty && !this.full && this.has_task) {
       return null
-    } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
+    } else if (this.full) {
       this.task = 'upgrade'
-      this.target = this.creep.room.controller
-    } else if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0) {
+      this.target = this.controller
+    } else if (this.empty) {
       this.task = 'mine'
     } else {
       this.task = 'mine'
     }
-  }
-
-  choose_source() {
-    return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
 
   run() {
@@ -30,7 +26,7 @@ class Bootstrap extends BaseCreep {
       }
       this.harvest()
     } else {
-      this.target = this.creep.room.controller
+      this.target = this.controller
       this.upgradeController()
     }
   }

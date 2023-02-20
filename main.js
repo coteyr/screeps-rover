@@ -1,6 +1,6 @@
 /* global Bootstrap */
 
-class RoomLevel1 {
+class RoomLevel0 {
   static run(room) {
     console.log(`Starting Tick for room: ${room.name}`)
     let spawns = _.filter(Game.spawns, function(spawn) {
@@ -23,6 +23,15 @@ class RoomLevel1 {
   }
 }
 
+module.exports.RoomLevel0 = RoomLevel0
+/* global RoomLevel0 */
+
+class RoomLevel1 extends RoomLevel0 {
+  static run(room) {
+    super.run(room)
+  }
+}
+
 module.exports.RoomLevel1 = RoomLevel1
 
 class BaseCreep {
@@ -30,8 +39,24 @@ class BaseCreep {
     this.creep = creep
   }
 
+  get empty() {
+    return this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0
+  }
+
+  get full() {
+    return this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0
+  }
+
+  get has_task() {
+    return this.creep.memory.task ? true : false
+  }
+
   get task() {
     return this.creep.memory.task
+  }
+
+  get controller() {
+    return this.creep.room.controller
   }
 
   set task(value) {
@@ -39,8 +64,8 @@ class BaseCreep {
       this.creep.memory.task = value
       this.target = null
     }
-
   }
+
 
   get memory() {
     return this.creep.memory
@@ -57,6 +82,10 @@ class BaseCreep {
     } else {
       this.creep.memory.target = value.id
     }
+  }
+
+  choose_source() {
+    return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
 
   harvest() {
@@ -85,20 +114,16 @@ class Bootstrap extends BaseCreep {
   }
 
   set_task() {
-    if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) > 0 && this.creep.memory.task) {
+    if (!this.empty && !this.full && this.has_task) {
       return null
-    } else if (this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0) {
+    } else if (this.full) {
       this.task = 'upgrade'
-      this.target = this.creep.room.controller
-    } else if (this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0) {
+      this.target = this.controller
+    } else if (this.empty) {
       this.task = 'mine'
     } else {
       this.task = 'mine'
     }
-  }
-
-  choose_source() {
-    return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
 
   run() {
@@ -109,7 +134,7 @@ class Bootstrap extends BaseCreep {
       }
       this.harvest()
     } else {
-      this.target = this.creep.room.controller
+      this.target = this.controller
       this.upgradeController()
     }
   }
