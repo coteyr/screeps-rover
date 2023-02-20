@@ -49,13 +49,16 @@ class RoomLevel0 {
     return this.room.find(FIND_FLAGS)
   }
 
+  get max_extensions() {
+    return [0, 5, 10, 20, 30, 40, 50, 60][this.room.controller.level - 1]
+  }
+
   build_extensions() {
-    let max_extensions = [0, 5, 10, 20, 30, 40, 50, 60][this.room.controller.level - 1]
-    if (this.extensions >= max_extensions) {
+    if (this.extensions.length >= this.max_extensions) {
       return null
     }
 
-    if (this.extensions + this.construction_sites >= max_extensions) {
+    if (this.extensions.length + this.construction_sites.length >= this.max_extensions) {
       return null // This will return early if other things are being built.
       // This is ok for now.
     }
@@ -130,18 +133,6 @@ class RoomLevel0 {
     if(location){
       this.room.createConstructionSite(location.x, location.y, STRUCTURE_EXTENSION)
     }
-
-
-
-    // List the potentials positions (ie: all plain or swamp tiles of the room).
-    // Remove tiles which don't fit some arbitrary rules (ie: in your case, filter all tiles where (x + y) % 2 === 0 which will create a checker pattern)
-    // Score the remaining tile based, for example, on distance and keep the best one (ie: use (pos) => spawn.pos.getRangeTo(pos) function to score and keep the minimum).
-
-    // not near a source - 3
-    // not near an edge - 5
-
-
-
   }
 }
 
