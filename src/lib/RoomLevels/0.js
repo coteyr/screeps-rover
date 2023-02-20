@@ -64,6 +64,7 @@ class RoomLevel0 {
       _.each(sources,  o => {
         let pos = new RoomPosition(s.x, s.y, this.room.name)
         ranges.push(pos.getRangeTo(o.pos))
+        console.log(pos.getRangeTo(o.pos))
       })
 
       return Math.lowest(ranges)
