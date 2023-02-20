@@ -15,3 +15,5 @@ scalable back-end code, and more client friendly front-end code. The other
 advantage added by _playing around_ in screeps is having a place to test
 interesting coding behaviors like linters, compilers, build scripts, among
 others, without having to risk modifying a real project.
+
+## Documentation
