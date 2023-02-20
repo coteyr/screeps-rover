@@ -99,7 +99,7 @@ class RoomLevel0 {
 
       if(passed){
         location = s
-        return s
+        return false
       }
 
     })
