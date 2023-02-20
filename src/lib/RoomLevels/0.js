@@ -9,7 +9,7 @@ class RoomLevel0 {
 
   /**
    * My spawns
-   * @returns spawns in a room owned by me
+   * @return spawns in a room owned by me
    */
   get spawns() {
     return _.filter(Game.spawns, s => { return s.my && s.pos.roomName === this.room.name })

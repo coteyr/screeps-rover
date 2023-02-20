@@ -1,4 +1,9 @@
-
+/**
+ * The Base Creep that all other creeps are based on
+ * these methods should be useful my most/all creeps and should
+ * help prevent having to have `this.creep` in the child classes
+ * @param {creep} creep - The creep wrapped by the BaseCreep object
+ */
 class BaseCreep {
   constructor(creep) {
     this.creep = creep

@@ -9,7 +9,7 @@ class RoomLevel0 {
 
   /**
    * My spawns
-   * @returns spawns in a room owned by me
+   * @return spawns in a room owned by me
    */
   get spawns() {
     return _.filter(Game.spawns, s => { return s.my && s.pos.roomName === this.room.name })
@@ -76,7 +76,12 @@ class RoomLevel3 extends RoomLevel0 {
 }
 
 module.exports.RoomLevel1 = RoomLevel3
-
+/**
+ * The Base Creep that all other creeps are based on
+ * these methods should be useful my most/all creeps and should
+ * help prevent having to have `this.creep` in the child classes
+ * @param {creep} creep - The creep wrapped by the BaseCreep object
+ */
 class BaseCreep {
   constructor(creep) {
     this.creep = creep
