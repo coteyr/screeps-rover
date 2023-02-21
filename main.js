@@ -352,7 +352,7 @@ class Bootstrap extends BaseCreep {
       }
       this.harvest()
     } else if(this.task === 'store') {
-      if(this.target && this.target.store && this.target.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
+      if(this.target && this.target.store && this.target.store.getFreeCapacity(RESOURCE_ENERGY) <= 0) {
         this.target = null
       }
       if(!this.target) {
