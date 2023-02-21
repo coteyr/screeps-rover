@@ -213,7 +213,7 @@ class RoomLevel3 extends RoomLevel0 {
         console.log(spawn.spawnCreep(bodies.builder, `builder-${this.room.name}-${Game.time}`, { memory: { type: 'builder' } }))
       }
       if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
-        spawn.spawnCreep(bodies.bootstrap, `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
+        spawn.spawnCreep(bodies.bootstrap)//, `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
       }
     })
 
