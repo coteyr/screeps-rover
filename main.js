@@ -299,7 +299,7 @@ class BaseCreep {
 
   transfer() {
     if(this.creep.transfer(this.target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-      this.creep.moveTo()
+      this.moveTo()
     }
   }
 
