@@ -24,13 +24,19 @@ others, without having to risk modifying a real project.
 *   [BaseCreep][1]
     *   [Parameters][2]
     *   [empty][3]
-*   [RoomLevel0][4]
-    *   [Parameters][5]
-    *   [spawns][6]
+    *   [full][4]
+    *   [has\_task][5]
+    *   [task][6]
+    *   [task][7]
+        *   [Parameters][8]
+    *   [controller][9]
+*   [RoomLevel0][10]
+    *   [Parameters][11]
+    *   [spawns][12]
 
 ## BaseCreep
 
-[src/creeps/base\_creep.js:8-104][7]
+[src/creeps/base\_creep.js:8-124][13]
 
 The Base Creep that all other creeps are based on
 these methods should be useful my most/all creeps and should
@@ -42,15 +48,57 @@ help prevent having to have `this.creep` in the child classes
 
 ### empty
 
-[src/creeps/base\_creep.js:17-19][8]
+[src/creeps/base\_creep.js:17-19][14]
 
-Is the current screep's carry parts empty
+Is the current creep's carry parts empty
 
-Returns **[boolean][9]** true if the creeps has 0 energy, false otherwise.
+Returns **[boolean][15]** true if the creeps has 0 energy, false otherwise.
+
+### full
+
+[src/creeps/base\_creep.js:25-27][16]
+
+Is the current creep full of energy
+
+Returns **[boolean][15]** true if the creep has no more room for energy, false otherwise
+
+### has\_task
+
+[src/creeps/base\_creep.js:33-35][17]
+
+Does the current creep have any task at all
+
+Returns **[boolean][15]** true if the creep has any task at all
+
+### task
+
+[src/creeps/base\_creep.js:41-43][18]
+
+The task the current creep is trying to do
+
+Returns **[string][19]** the task name the creep is trying to carry out
+
+### task
+
+[src/creeps/base\_creep.js:57-62][20]
+
+Set the task the creep should try to do
+
+#### Parameters
+
+*   `value` **[string][19]** The task that should be set
+
+### controller
+
+[src/creeps/base\_creep.js:49-51][21]
+
+Get the controller for the room the creep is currently in
+
+Returns **StructureController** The controller that is in the room the creep is in
 
 ## RoomLevel0
 
-[src/lib/RoomLevels/0.js:7-152][10]
+[src/lib/RoomLevels/0.js:7-152][22]
 
 This is the base class for all Rooms
 
@@ -61,7 +109,7 @@ This is the base class for all Rooms
 
 ### spawns
 
-[src/lib/RoomLevels/0.js:16-18][11]
+[src/lib/RoomLevels/0.js:16-18][23]
 
 My spawns
 
@@ -73,18 +121,42 @@ Returns **any** spawns in a room owned by me
 
 [3]: #empty
 
-[4]: #roomlevel0
+[4]: #full
 
-[5]: #parameters-1
+[5]: #has_task
 
-[6]: #spawns
+[6]: #task
 
-[7]: https://github.com/coteyr/screeps-rover/blob/089ca5d30666b138aea9de7e8d2f529ac06934c3/src/creeps/base_creep.js#L8-L104 "Source code on GitHub"
+[7]: #task-1
 
-[8]: https://github.com/coteyr/screeps-rover/blob/089ca5d30666b138aea9de7e8d2f529ac06934c3/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
+[8]: #parameters-1
 
-[9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[9]: #controller
 
-[10]: https://github.com/coteyr/screeps-rover/blob/089ca5d30666b138aea9de7e8d2f529ac06934c3/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
+[10]: #roomlevel0
 
-[11]: https://github.com/coteyr/screeps-rover/blob/089ca5d30666b138aea9de7e8d2f529ac06934c3/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
+[11]: #parameters-2
+
+[12]: #spawns
+
+[13]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/creeps/base_creep.js#L8-L124 "Source code on GitHub"
+
+[14]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
+
+[15]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[16]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/creeps/base_creep.js#L25-L27 "Source code on GitHub"
+
+[17]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/creeps/base_creep.js#L33-L35 "Source code on GitHub"
+
+[18]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/creeps/base_creep.js#L41-L43 "Source code on GitHub"
+
+[19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[20]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/creeps/base_creep.js#L57-L62 "Source code on GitHub"
+
+[21]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/creeps/base_creep.js#L49-L51 "Source code on GitHub"
+
+[22]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
+
+[23]: https://github.com/coteyr/screeps-rover/blob/447f01c6f9d1b99f8e0dd91602a12bfec610d447/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"

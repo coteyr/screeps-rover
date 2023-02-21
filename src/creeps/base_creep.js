@@ -11,29 +11,49 @@ class BaseCreep {
   }
 
   /**
-   * Is the current screep's carry parts empty
+   * Is the current creep's carry parts empty
    * @return {boolean} - true if the creeps has 0 energy, false otherwise.
    */
   get empty() {
     return this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0
   }
 
+  /**
+   * Is the current creep full of energy
+   * @return {boolean} - true if the creep has no more room for energy, false otherwise
+   */
   get full() {
     return this.creep.store.getFreeCapacity([RESOURCE_ENERGY]) === 0
   }
 
+  /**
+   * Does the current creep have any task at all
+   * @return {boolean} - true if the creep has any task at all
+   */
   get has_task() {
     return this.creep.memory.task ? true : false
   }
 
+  /**
+   * The task the current creep is trying to do
+   * @return {string} - the task name the creep is trying to carry out
+   */
   get task() {
     return this.creep.memory.task
   }
 
+  /**
+   * Get the controller for the room the creep is currently in
+   * @return {StructureController} - The controller that is in the room the creep is in
+   */
   get controller() {
     return this.creep.room.controller
   }
 
+  /**
+   * Set the task the creep should try to do
+   * @param {string} value - The task that should be set
+   */
   set task(value) {
     if(this.creep.memory.task !== value) {
       this.creep.memory.task = value
