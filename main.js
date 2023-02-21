@@ -297,6 +297,12 @@ class BaseCreep {
     }
   }
 
+  transfer() {
+    if(this.creep.transfer(this.target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+      this.creep.moveTo()
+    }
+  }
+
   moveTo() {
     this.creep.moveTo(this.target)
   }
@@ -317,11 +323,19 @@ class Bootstrap extends BaseCreep {
   }
 
   set_task() {
+    if(this.room.energyAvailable >= 300 && this.task === 'store') {
+      this.task = null
+    }
     if (!this.empty && !this.full && this.has_task) {
       return null
     } else if (this.full) {
-      this.task = 'upgrade'
-      this.target = this.controller
+      if(this.room.energyAvailable < 300) {
+        this.task = 'store'
+        this.target = this.creep.pos.findClosestByRange(FIND_MY_SPAWNS)
+      } else {
+        this.task = 'upgrade'
+        this.target = this.controller
+      }
     } else if (this.empty) {
       this.task = 'mine'
     } else {
@@ -336,6 +350,11 @@ class Bootstrap extends BaseCreep {
         this.target = this.choose_source()
       }
       this.harvest()
+    } else if(this.task === 'store') {
+      if(!this.target) {
+        this.target = this.creep.pos.findClosestByRange(FIND_MY_SPAWNS)
+      }
+      this.store()
     } else {
       this.target = this.controller
       this.upgradeController()

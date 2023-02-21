@@ -41,6 +41,7 @@
       "FIND_MY_CONSTRUCTION_SITES": "readonly",
       "RoomPosition": "readonly",
       "STRUCTURE_EXTENSION": "readonly",
-      "FIND_FLAGS": "readonly"
+      "FIND_FLAGS": "readonly",
+      "FIND_MY_SPAWNS": "readonly"
     }
 }
