@@ -211,8 +211,7 @@ class RoomLevel3 extends RoomLevel0 {
     _.forEach(this.spawns, spawn => {
       if(this.builders.length < 2 && spawn.store[RESOURCE_ENERGY] >= 300 && !spawn.spawning) {
         let body = bodies.builder
-        console.log(body)
-        console.log(spawn.spawnCreep(body, `builder-${this.room.name}-${Game.time}`, { memory: { type: 'builder' } }))
+        spawn.spawnCreep(body, `builder-${this.room.name}-${Game.time}`, { memory: { type: 'builder' } })
       }
       if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
         spawn.spawnCreep(bodies.bootstrap, `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
@@ -284,7 +283,6 @@ class BaseCreep {
   choose_storage() {
     let structures = this.creep.room.find(FIND_MY_STRUCTURES)
     structures = _.filter(structures, s => { return ((s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_EXTENSION) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0 )})
-    console.log(structures.length)
     let tar = this.creep.pos.findClosestByRange(structures)
     return tar
   }
@@ -425,14 +423,14 @@ class Bodies {
   }
 
   get bootstrap() {
-    return ['WORK', 'CARRY', 'MOVE']
+    return [WORK, CARRY, MOVE]
   }
 
   get builder() {
     let rank = {
-      'WORK': 1,
-      'CARRY': 2,
-      'MOVE': 3
+      WORK: 1,
+      CARRY: 2,
+      MOVE: 3
     }
     let max = this.room.energyCapacityAvailable
     let body = []

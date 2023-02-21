@@ -29,7 +29,7 @@ others, without having to risk modifying a real project.
 
 ## BaseCreep
 
-[src/creeps/base\_creep.js:8-101][6]
+[src/creeps/base\_creep.js:8-100][6]
 
 The Base Creep that all other creeps are based on
 these methods should be useful my most/all creeps and should
@@ -68,8 +68,8 @@ Returns **any** spawns in a room owned by me
 
 [5]: #spawns
 
-[6]: https://github.com/coteyr/screeps-rover/blob/74a700946df6276643589df6fbd5514b6a34d9df/src/creeps/base_creep.js#L8-L101 "Source code on GitHub"
+[6]: https://github.com/coteyr/screeps-rover/blob/d94854679dcbf047dd26a68648015572b1a631d7/src/creeps/base_creep.js#L8-L100 "Source code on GitHub"
 
-[7]: https://github.com/coteyr/screeps-rover/blob/74a700946df6276643589df6fbd5514b6a34d9df/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
+[7]: https://github.com/coteyr/screeps-rover/blob/d94854679dcbf047dd26a68648015572b1a631d7/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
 
-[8]: https://github.com/coteyr/screeps-rover/blob/74a700946df6276643589df6fbd5514b6a34d9df/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
+[8]: https://github.com/coteyr/screeps-rover/blob/d94854679dcbf047dd26a68648015572b1a631d7/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"

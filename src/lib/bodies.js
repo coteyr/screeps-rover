@@ -5,14 +5,14 @@ class Bodies {
   }
 
   get bootstrap() {
-    return ['WORK', 'CARRY', 'MOVE']
+    return [WORK, CARRY, MOVE]
   }
 
   get builder() {
     let rank = {
-      'WORK': 1,
-      'CARRY': 2,
-      'MOVE': 3
+      WORK: 1,
+      CARRY: 2,
+      MOVE: 3
     }
     let max = this.room.energyCapacityAvailable
     let body = []
