@@ -34,6 +34,9 @@ class Bootstrap extends BaseCreep {
       }
       this.harvest()
     } else if(this.task === 'store') {
+      if(this.target.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
+        this.target = null
+      }
       if(!this.target) {
         this.target = this.creep.pos.findClosestByRange(FIND_MY_SPAWNS)
       }
