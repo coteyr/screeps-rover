@@ -189,6 +189,9 @@ class RoomLevel3 extends RoomLevel0 {
   }
 
   run_creeps() {
+    // at 500 energy capacity
+    // then move to stationary things
+    // and transporters that move stuff between
     _.forEach(this.creeps, function(creep) {
       let screep = null
       switch(creep.memory.type) {
@@ -235,6 +238,10 @@ class BaseCreep {
     this.creep = creep
   }
 
+  /**
+   * Is the current screep's carry parts empty
+   * @return {boolean} true if the creeps has 0 energy, false otherwise.
+   */
   get empty() {
     return this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0
   }

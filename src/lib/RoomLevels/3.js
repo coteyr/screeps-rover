@@ -12,6 +12,9 @@ class RoomLevel3 extends RoomLevel0 {
   }
 
   run_creeps() {
+    // at 500 energy capacity
+    // then move to stationary things
+    // and transporters that move stuff between
     _.forEach(this.creeps, function(creep) {
       let screep = null
       switch(creep.memory.type) {

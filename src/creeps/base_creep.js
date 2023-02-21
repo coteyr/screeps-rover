@@ -10,6 +10,10 @@ class BaseCreep {
     this.creep = creep
   }
 
+  /**
+   * Is the current screep's carry parts empty
+   * @return {boolean} true if the creeps has 0 energy, false otherwise.
+   */
   get empty() {
     return this.creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0
   }

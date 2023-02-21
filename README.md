@@ -23,13 +23,14 @@ others, without having to risk modifying a real project.
 
 *   [BaseCreep][1]
     *   [Parameters][2]
-*   [RoomLevel0][3]
-    *   [Parameters][4]
-    *   [spawns][5]
+    *   [empty][3]
+*   [RoomLevel0][4]
+    *   [Parameters][5]
+    *   [spawns][6]
 
 ## BaseCreep
 
-[src/creeps/base\_creep.js:8-100][6]
+[src/creeps/base\_creep.js:8-104][7]
 
 The Base Creep that all other creeps are based on
 these methods should be useful my most/all creeps and should
@@ -39,9 +40,17 @@ help prevent having to have `this.creep` in the child classes
 
 *   `creep` **creep** The creep wrapped by the BaseCreep object
 
+### empty
+
+[src/creeps/base\_creep.js:17-19][8]
+
+Is the current screep's carry parts empty
+
+Returns **[boolean][9]** true if the creeps has 0 energy, false otherwise.
+
 ## RoomLevel0
 
-[src/lib/RoomLevels/0.js:7-152][7]
+[src/lib/RoomLevels/0.js:7-152][10]
 
 This is the base class for all Rooms
 
@@ -52,7 +61,7 @@ This is the base class for all Rooms
 
 ### spawns
 
-[src/lib/RoomLevels/0.js:16-18][8]
+[src/lib/RoomLevels/0.js:16-18][11]
 
 My spawns
 
@@ -62,14 +71,20 @@ Returns **any** spawns in a room owned by me
 
 [2]: #parameters
 
-[3]: #roomlevel0
+[3]: #empty
 
-[4]: #parameters-1
+[4]: #roomlevel0
 
-[5]: #spawns
+[5]: #parameters-1
 
-[6]: https://github.com/coteyr/screeps-rover/blob/d94854679dcbf047dd26a68648015572b1a631d7/src/creeps/base_creep.js#L8-L100 "Source code on GitHub"
+[6]: #spawns
 
-[7]: https://github.com/coteyr/screeps-rover/blob/d94854679dcbf047dd26a68648015572b1a631d7/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
+[7]: https://github.com/coteyr/screeps-rover/blob/79c0d2ec7671e08f628ca3047f5e654e83c63cc0/src/creeps/base_creep.js#L8-L104 "Source code on GitHub"
 
-[8]: https://github.com/coteyr/screeps-rover/blob/d94854679dcbf047dd26a68648015572b1a631d7/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
+[8]: https://github.com/coteyr/screeps-rover/blob/79c0d2ec7671e08f628ca3047f5e654e83c63cc0/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
+
+[9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+
+[10]: https://github.com/coteyr/screeps-rover/blob/79c0d2ec7671e08f628ca3047f5e654e83c63cc0/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
+
+[11]: https://github.com/coteyr/screeps-rover/blob/79c0d2ec7671e08f628ca3047f5e654e83c63cc0/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
