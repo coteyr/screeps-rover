@@ -279,13 +279,10 @@ class BaseCreep {
   }
 
   choose_storage() {
-    let tar = this.creep.pos.findClosestByRange(
-      _.filter(this.creep.room.find(FIND_MY_STRUCTURES, {
-        filter: s => { return (s.structureType === STRUCTURE_SPAWN || s.structureType == STRUCTURE_SPAWN) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-        }
-      }
-      ))
-    )
+    let structures = this.creep.room.find(FIND_MY_STRUCTURES)
+    structures = _.filter(structures, s => { return ((s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_SPAWN) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0)})
+    let tar = this.creep.pos.findClosestByRange(structures)
+
     console.log(tar.structureType)
     return tar
   }
