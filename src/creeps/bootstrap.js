@@ -38,7 +38,7 @@ class Bootstrap extends BaseCreep {
         this.target = null
       }
       if(!this.target) {
-        this.target = this.creep.pos.findClosestByRange(FIND_MY_SPAWNS)
+        this.target =  this.creep.pos.findClosestByRange(_.filter(this.creep.room.find(FIND_MY_STRUCTURES, {filter: s => { return (s.structureType === STRUCTURE_SPAWN || s.structureType == STRUCTURE_SPAWN) &&  s.store.getFreeCapacity(RESOURCE_ENERGY)}})))
       }
       this.transfer()
     } else {
