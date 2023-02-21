@@ -278,6 +278,16 @@ class BaseCreep {
     }
   }
 
+  choose_storage() {
+    return this.creep.pos.findClosestByRange(
+      _.filter(this.creep.room.find(FIND_MY_STRUCTURES, {
+        filter: s => { return (s.structureType === STRUCTURE_SPAWN || s.structureType == STRUCTURE_SPAWN) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+        }
+      }
+      ))
+    )
+  }
+
   choose_source() {
     return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
@@ -332,7 +342,7 @@ class Bootstrap extends BaseCreep {
     } else if (this.full) {
       if(this.creep.room.energyAvailable < this.creep.room.energyCapacityAvailable) {
         this.task = 'store'
-        this.target = this.creep.pos.findClosestByRange(_.filter(this.creep.room.find(FIND_MY_STRUCTURES, {filter: s => { return (s.structureType === STRUCTURE_SPAWN || s.structureType == STRUCTURE_SPAWN) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0}})))
+        this.target = this.choose_storage
       } else {
         this.task = 'upgrade'
         this.target = this.controller
@@ -356,7 +366,7 @@ class Bootstrap extends BaseCreep {
         this.target = null
       }
       if(!this.target) {
-        this.target =  this.creep.pos.findClosestByRange(_.filter(this.creep.room.find(FIND_MY_STRUCTURES, {filter: s => { return (s.structureType === STRUCTURE_SPAWN || s.structureType == STRUCTURE_SPAWN) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0}})))
+        this.target =  this.choose_storage
       }
       this.transfer()
     } else {
