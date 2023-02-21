@@ -178,6 +178,7 @@ module.exports.RoomLevel1 = RoomLevel2
 /* global RoomLevel0 */
 /* global Bootstrap */
 /* global Builder */
+/* global Bodies */
 
 class RoomLevel3 extends RoomLevel0 {
   run(room) {
@@ -208,10 +209,10 @@ class RoomLevel3 extends RoomLevel0 {
   run_spawns() {
     _.forEach(this.spawns, spawn => {
       if(this.builders.length < 2 && spawn.store[RESOURCE_ENERGY] >= 300 && !spawn.spawning) {
-        spawn.spawnCreep([WORK, WORK, MOVE, CARRY], `builder-${this.room.name}-${Game.time}`, { memory: { type: 'buiilder' } })
+        spawn.spawnCreep(Bodies.builder, `builder-${this.room.name}-${Game.time}`, { memory: { type: 'builder' } })
       }
       if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
-        spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
+        spawn.spawnCreep(Bodies.bootstrap, `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
       }
     })
 
@@ -399,6 +400,37 @@ class Builder extends BaseCreep {
 }
 
 module.exports.Builder = Builder
+class Bodies {
+
+  constructor(room) {
+    this.room = room
+  }
+
+  get bootstrap() {
+    return ['WORK', 'CARRY', 'MOVE']
+  }
+
+  get builder() {
+    let rank = {
+      'WORK': 1,
+      'CARRY': 2,
+      'MOVE': 3
+    }
+    let max = this.room.energyCapacityAvailable
+    let body = []
+    while (max > 0) {
+      max = max - 250
+      if(max > 0) {
+        body.push('WORK', 'CARRY', 'MOVE', 'MOVE')
+      }
+    }
+
+    body = _.sortBy(body, _.propertyOf(rank))
+    return body
+  }
+}
+
+module.exports.Bodies = Bodies
 class Math {
   static fewest_targeting(objects, creeps) {
     return _.first(this.order_by_targeting(objects, creeps))
