@@ -323,7 +323,7 @@ class Bootstrap extends BaseCreep {
   }
 
   set_task() {
-    if(this.room.energyAvailable >= 300 && this.task === 'store') {
+    if(this.creep.room.energyAvailable >= 300 && this.task === 'store') {
       this.task = null
     }
     if (!this.empty && !this.full && this.has_task) {
