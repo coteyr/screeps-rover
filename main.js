@@ -208,7 +208,7 @@ class RoomLevel3 extends RoomLevel0 {
   run_spawns() {
     _.forEach(this.spawns, spawn => {
       if(this.builders.length < 2 && spawn.store[RESOURCE_ENERGY] >= 300 && !spawn.spawning) {
-        spawn.spawnCreep([WORK, WORK, MOVE, MOVE, CARRY, CARRY], `builder-${this.room.name}-${Game.time}`, { memory: { type: 'buiilder' } })
+        spawn.spawnCreep([WORK, WORK, MOVE, CARRY], `builder-${this.room.name}-${Game.time}`, { memory: { type: 'buiilder' } })
       }
       if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
         spawn.spawnCreep([WORK, MOVE, CARRY], `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
