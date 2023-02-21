@@ -328,7 +328,7 @@ class Bootstrap extends BaseCreep {
       this.task = null
     }
     if (!this.empty && !this.full && this.has_task) {
-      return null
+      return this.task
     } else if (this.full) {
       if(this.creep.room.energyAvailable < 300) {
         this.task = 'store'
@@ -374,11 +374,13 @@ class Builder extends BaseCreep {
 
   set_task() {
     if (!this.empty && !this.full && this.has_task) {
-      return null
+      return this.task
     } else if (this.full) {
       this.task = 'build'
     } else if (this.empty) {
       this.task = 'mine'
+    } else if (this.has_task) {
+      return this.task
     } else {
       this.task = 'mine'
     }
@@ -392,7 +394,9 @@ class Builder extends BaseCreep {
       }
       this.build()
     } else {
-      this.target = this.choose_source()
+      if(!this.target) {
+        this.target = this.choose_source()
+      }
       this.harvest()
     }
   }

@@ -10,7 +10,7 @@ class Bootstrap extends BaseCreep {
       this.task = null
     }
     if (!this.empty && !this.full && this.has_task) {
-      return null
+      return this.task
     } else if (this.full) {
       if(this.creep.room.energyAvailable < 300) {
         this.task = 'store'
