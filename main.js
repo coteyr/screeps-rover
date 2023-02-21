@@ -329,7 +329,7 @@ class Bootstrap extends BaseCreep {
     if (!this.empty && !this.full && this.has_task) {
       return null
     } else if (this.full) {
-      if(this.room.energyAvailable < 300) {
+      if(this.creep.room.energyAvailable < 300) {
         this.task = 'store'
         this.target = this.creep.pos.findClosestByRange(FIND_MY_SPAWNS)
       } else {
@@ -354,7 +354,7 @@ class Bootstrap extends BaseCreep {
       if(!this.target) {
         this.target = this.creep.pos.findClosestByRange(FIND_MY_SPAWNS)
       }
-      this.store()
+      this.transfer()
     } else {
       this.target = this.controller
       this.upgradeController()
