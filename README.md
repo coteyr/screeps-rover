@@ -79,12 +79,12 @@ Returns **any** spawns in a room owned by me
 
 [6]: #spawns
 
-[7]: https://github.com/coteyr/screeps-rover/blob/79c0d2ec7671e08f628ca3047f5e654e83c63cc0/src/creeps/base_creep.js#L8-L104 "Source code on GitHub"
+[7]: https://github.com/coteyr/screeps-rover/blob/089ca5d30666b138aea9de7e8d2f529ac06934c3/src/creeps/base_creep.js#L8-L104 "Source code on GitHub"
 
-[8]: https://github.com/coteyr/screeps-rover/blob/79c0d2ec7671e08f628ca3047f5e654e83c63cc0/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
+[8]: https://github.com/coteyr/screeps-rover/blob/089ca5d30666b138aea9de7e8d2f529ac06934c3/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
 
 [9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[10]: https://github.com/coteyr/screeps-rover/blob/79c0d2ec7671e08f628ca3047f5e654e83c63cc0/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
+[10]: https://github.com/coteyr/screeps-rover/blob/089ca5d30666b138aea9de7e8d2f529ac06934c3/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
 
-[11]: https://github.com/coteyr/screeps-rover/blob/79c0d2ec7671e08f628ca3047f5e654e83c63cc0/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
+[11]: https://github.com/coteyr/screeps-rover/blob/089ca5d30666b138aea9de7e8d2f529ac06934c3/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
