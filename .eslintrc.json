@@ -42,6 +42,7 @@
       "RoomPosition": "readonly",
       "STRUCTURE_EXTENSION": "readonly",
       "FIND_FLAGS": "readonly",
-      "FIND_MY_SPAWNS": "readonly"
+      "FIND_MY_SPAWNS": "readonly",
+      "STRUCTURE_SPAWN": "readonly"
     }
 }

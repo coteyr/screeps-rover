@@ -324,15 +324,15 @@ class Bootstrap extends BaseCreep {
   }
 
   set_task() {
-    if(this.creep.room.energyAvailable >= 300 && this.task === 'store') {
+    if(this.creep.room.energyAvailable >= this.creep.room.energyCapacityAvailable && this.task === 'store') {
       this.task = null
     }
     if (!this.empty && !this.full && this.has_task) {
       return this.task
     } else if (this.full) {
-      if(this.creep.room.energyAvailable < 300) {
+      if(this.creep.room.energyAvailable < this.creep.room.energyCapacityAvailable) {
         this.task = 'store'
-        this.target = this.creep.pos.findClosestByRange(FIND_MY_SPAWNS)
+        this.target = this.creep.pos.findClosestByRange(_.filter(this.creep.room.find(FIND_MY_STRUCTURES, {filter: s => { return (s.structureType === STRUCTURE_SPAWN || s.structureType == STRUCTURE_SPAWN) &&  s.store.getFreeCapacity(RESOURCE_ENERGY)}})))
       } else {
         this.task = 'upgrade'
         this.target = this.controller
