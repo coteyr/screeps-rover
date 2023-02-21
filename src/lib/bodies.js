@@ -24,7 +24,7 @@ class Bodies {
     }
 
     body = _.sortBy(body, _.propertyOf(rank))
-    console.log(body)
+    console.log(Array.isArray(body))
     return body
   }
 }
