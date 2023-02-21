@@ -437,7 +437,7 @@ class Bodies {
     while (max > 0) {
       max = max - 250
       if(max > 0) {
-        body.concat(['WORK', 'CARRY', 'MOVE', 'MOVE'])
+        body = body.concat(['WORK', 'CARRY', 'MOVE', 'MOVE'])
       }
     }
 
