@@ -60,8 +60,6 @@ class BaseCreep {
     structures = _.filter(structures, s => { return ((s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_EXTENSION) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0 )})
     console.log(structures.length)
     let tar = this.creep.pos.findClosestByRange(structures)
-
-    console.log(tar.structureType)
     return tar
   }
 

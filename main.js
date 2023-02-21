@@ -207,13 +207,14 @@ class RoomLevel3 extends RoomLevel0 {
   }
 
   run_spawns() {
+    let bodies = new Bodies(this.room)
     _.forEach(this.spawns, spawn => {
       if(this.builders.length < 2 && spawn.store[RESOURCE_ENERGY] >= 300 && !spawn.spawning) {
         console.log('need builder')
-        spawn.spawnCreep(Bodies.builder, `builder-${this.room.name}-${Game.time}`, { memory: { type: 'builder' } })
+        spawn.spawnCreep(bodies.builder, `builder-${this.room.name}-${Game.time}`, { memory: { type: 'builder' } })
       }
       if(this.creeps.length < 5 && spawn.store[RESOURCE_ENERGY] >= 150 && !spawn.spawning) {
-        spawn.spawnCreep(Bodies.bootstrap, `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
+        spawn.spawnCreep(bodies.bootstrap, `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
       }
     })
 
@@ -284,8 +285,6 @@ class BaseCreep {
     structures = _.filter(structures, s => { return ((s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_EXTENSION) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0 )})
     console.log(structures.length)
     let tar = this.creep.pos.findClosestByRange(structures)
-
-    console.log(tar.structureType)
     return tar
   }
 
