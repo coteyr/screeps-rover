@@ -14,7 +14,7 @@ class Bootstrap extends BaseCreep {
     } else if (this.full) {
       if(this.creep.room.energyAvailable < this.creep.room.energyCapacityAvailable) {
         this.task = 'store'
-        this.target = this.choose_storage
+        this.target = this.choose_storage()
       } else {
         this.task = 'upgrade'
         this.target = this.controller
@@ -38,7 +38,7 @@ class Bootstrap extends BaseCreep {
         this.target = null
       }
       if(!this.target) {
-        this.target =  this.choose_storage
+        this.target =  this.choose_storage()
       }
       this.transfer()
     } else {
