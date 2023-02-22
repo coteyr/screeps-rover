@@ -85,6 +85,10 @@ class RoomLevel0 {
     return _.filter(this.creeps, c => { return c.memory.type === 'carrier' })
   }
 
+  get bootstraps() {
+    return _.filter(this.creeps, c => { return c.memory.type === 'bootstrap' })
+  }
+
   need_creeps(spawn, count, type, min_energy, condition) {
     if(this[`${type}s`].length < count && condition && this.room.energyAvailable >= min_energy && !spawn.spawning) {
       let bodies = new Bodies(this.room)
