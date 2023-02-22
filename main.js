@@ -382,8 +382,9 @@ class BaseCreep {
   }
 
   choose_recipiant() {
-    console.log(1)
-    return Math.fewest_targeting(this.creep.room.find(FIND_MY_CREEPS, {filter: c => {c.energyCapacityAvailable > 49}}), Game.creeps)
+    let targets = this.creep.room.find(FIND_MY_CREEPS, {filter: c => {c.store.getFreeCapacity(RESOURCE_ENERGY) > 49}})
+    console.log(targets.length)
+    return Math.fewest_targeting(targets, Game.creeps)
   }
 
   pickup() {
