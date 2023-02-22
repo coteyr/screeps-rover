@@ -2,6 +2,7 @@
 /* global Bootstrap */
 /* global Builder */
 /* global Bodies */
+/* global Miner */
 
 class RoomLevel3 extends RoomLevel0 {
   run(room) {
@@ -20,6 +21,9 @@ class RoomLevel3 extends RoomLevel0 {
       switch(creep.memory.type) {
       case 'builder':
         screep = new Builder(creep)
+        break
+      case 'miner':
+        screep = new Miner(creep)
         break
       default:
         screep = new Bootstrap(creep)

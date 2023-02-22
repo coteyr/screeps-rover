@@ -187,6 +187,7 @@ module.exports.RoomLevel1 = RoomLevel2
 /* global Bootstrap */
 /* global Builder */
 /* global Bodies */
+/* global Miner */
 
 class RoomLevel3 extends RoomLevel0 {
   run(room) {
@@ -205,6 +206,9 @@ class RoomLevel3 extends RoomLevel0 {
       switch(creep.memory.type) {
       case 'builder':
         screep = new Builder(creep)
+        break
+      case 'miner':
+        screep = new Miner(creep)
         break
       default:
         screep = new Bootstrap(creep)
@@ -462,6 +466,30 @@ class Builder extends BaseCreep {
 }
 
 module.exports.Builder = Builder
+/* global BaseCreep */
+
+class Miner extends BaseCreep {
+  constructor(creep) {
+    super(creep)
+  }
+
+  set_task() {
+    this.task = 'mine'
+  }
+
+  run() {
+    this.set_task()
+    if(this.task === 'mine') {
+      if(!this.target) {
+        this.target = this.choose_source()
+      }
+      this.harvest()
+    }
+  }
+
+}
+
+module.exports.Miner = Miner
 class Bodies {
 
   constructor(room) {
