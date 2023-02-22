@@ -36,7 +36,7 @@ others, without having to risk modifying a real project.
 
 ## BaseCreep
 
-[src/creeps/base\_creep.js:8-142][13]
+[src/creeps/base\_creep.js:8-143][13]
 
 The Base Creep that all other creeps are based on
 these methods should be useful my most/all creeps and should
@@ -139,24 +139,24 @@ Returns **any** spawns in a room owned by me
 
 [12]: #spawns
 
-[13]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/creeps/base_creep.js#L8-L142 "Source code on GitHub"
+[13]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/creeps/base_creep.js#L8-L143 "Source code on GitHub"
 
-[14]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
+[14]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
 
 [15]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[16]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/creeps/base_creep.js#L25-L27 "Source code on GitHub"
+[16]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/creeps/base_creep.js#L25-L27 "Source code on GitHub"
 
-[17]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/creeps/base_creep.js#L33-L35 "Source code on GitHub"
+[17]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/creeps/base_creep.js#L33-L35 "Source code on GitHub"
 
-[18]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/creeps/base_creep.js#L41-L43 "Source code on GitHub"
+[18]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/creeps/base_creep.js#L41-L43 "Source code on GitHub"
 
 [19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[20]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/creeps/base_creep.js#L57-L62 "Source code on GitHub"
+[20]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/creeps/base_creep.js#L57-L62 "Source code on GitHub"
 
-[21]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/creeps/base_creep.js#L49-L51 "Source code on GitHub"
+[21]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/creeps/base_creep.js#L49-L51 "Source code on GitHub"
 
-[22]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/lib/RoomLevels/0.js#L7-L168 "Source code on GitHub"
+[22]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/lib/RoomLevels/0.js#L7-L168 "Source code on GitHub"
 
-[23]: https://github.com/coteyr/screeps-rover/blob/1556506b978f4edc5e26e1da72645d8a6390ee39/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
+[23]: https://github.com/coteyr/screeps-rover/blob/dd19e2d9712ab74aca51e8c1ef7f2c196e26f91c/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
