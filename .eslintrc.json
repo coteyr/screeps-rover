@@ -43,6 +43,8 @@
       "STRUCTURE_EXTENSION": "readonly",
       "FIND_FLAGS": "readonly",
       "FIND_MY_SPAWNS": "readonly",
-      "STRUCTURE_SPAWN": "readonly"
+      "STRUCTURE_SPAWN": "readonly",
+      "FIND_DROPPED_RESOURCES": "readonly"
+
     }
 }

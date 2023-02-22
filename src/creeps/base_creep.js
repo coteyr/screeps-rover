@@ -79,6 +79,10 @@ class BaseCreep {
     }
   }
 
+  get has_static_miner() {
+    return this.creep.room.energyCapacityAvailable > 550 //maybe check for miners?
+  }
+
   choose_storage() {
     let structures = this.creep.room.find(FIND_MY_STRUCTURES)
     structures = _.filter(structures, s => { return ((s.structureType === STRUCTURE_SPAWN || s.structureType === STRUCTURE_EXTENSION) &&  s.store.getFreeCapacity(RESOURCE_ENERGY) > 0 )})
@@ -90,8 +94,18 @@ class BaseCreep {
     return Math.fewest_targeting(this.creep.room.find(FIND_SOURCES), Game.creeps)
   }
 
+  choose_energy() {
+    return Math.fewest_targeting(this.creep.room.find(FIND_DROPPED_RESOURCES), Game.creeps)
+  }
+
   choose_construction_site() {
     return Math.most_targeting(this.creep.room.find(FIND_MY_CONSTRUCTION_SITES), Game.creeps)
+  }
+
+  pickup() {
+    if(this.creep.pickup(this.target) === ERR_NOT_IN_RANGE) {
+      this.moveTo()
+    }
   }
 
   harvest() {

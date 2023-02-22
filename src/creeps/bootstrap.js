@@ -20,9 +20,17 @@ class Bootstrap extends BaseCreep {
         this.target = this.controller
       }
     } else if (this.empty) {
-      this.task = 'mine'
+      if (this.has_static_miners) {
+        this.task = 'collect'
+      } else {
+        this.task = 'mine'
+      }
     } else {
-      this.task = 'mine'
+      if (this.has_static_miners) {
+        this.task = 'collect'
+      } else {
+        this.task = 'mine'
+      }
     }
   }
 
@@ -33,6 +41,12 @@ class Bootstrap extends BaseCreep {
         this.target = this.choose_source()
       }
       this.harvest()
+    } else if(this.task === 'collect') {
+      if(!this.target) {
+        this.target = this.choose_energy()
+      }
+      this.pickup()
+
     } else if(this.task === 'store') {
       if(this.target && this.target.store && this.target.store.getFreeCapacity(RESOURCE_ENERGY) <= 0) {
         this.target = null
