@@ -1,6 +1,6 @@
 /* global BaseCreep */
 
-class Miner extends BaseCreep {
+class Upgrader extends BaseCreep {
   constructor(creep) {
     super(creep)
   }
@@ -21,4 +21,4 @@ class Miner extends BaseCreep {
 
 }
 
-module.exports.Miner = Miner
+module.exports.Upgrader = Upgrader
