@@ -1,5 +1,7 @@
 # Screeps Rover
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/b0a2df9e89445294c049/maintainability)](https://codeclimate.com/github/coteyr/screeps-rover/maintainability)
+
 This project aims to explore javascript stuff while playing screeps. The idea is
 to keep my mind and skills focused on generating good JS code while still having
 a play ground to test out new ideas and methods.
