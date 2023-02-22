@@ -4,6 +4,7 @@
 /* global Bodies */
 /* global Miner */
 /* global Upgrader */
+/* global Carrier */
 
 class RoomLevel3 extends RoomLevel0 {
   run(room) {
@@ -28,6 +29,9 @@ class RoomLevel3 extends RoomLevel0 {
         break
       case 'upgrader':
         screep = new Upgrader(creep)
+        break
+      case 'carrier':
+        screep = new Carrier(creep)
         break
       default:
         screep = new Bootstrap(creep)
