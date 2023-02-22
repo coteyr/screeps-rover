@@ -80,6 +80,10 @@ class RoomLevel0 {
     return _.filter(this.creeps, c => { return c.memory.type === 'upgrader' })
   }
 
+  get carriers() {
+    return _.filter(this.creeps, c => { return c.memory.type === 'carrier' })
+  }
+
   build_extensions() {
     if (this.extensions.length >= this.max_extensions) {
       return null

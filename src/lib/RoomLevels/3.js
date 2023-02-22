@@ -67,6 +67,12 @@ class RoomLevel3 extends RoomLevel0 {
         console.log(body)
         spawn.spawnCreep(body, `upgrader-${this.room.name}-${Game.time}`, { memory: { type: 'upgrader' } })
       }
+      if(this.carriers.length < 4 && this.room.energyAvailable > 550 && !spawn.spawning) {
+        let body = bodies.carrier
+        console.log('need carrier')
+        console.log(body)
+        spawn.spawnCreep(body, `carrier-${this.room.name}-${Game.time}`, { memory: { type: 'carrier' } })
+      }
     })
 
     super.run_spawns()

@@ -80,6 +80,10 @@ class RoomLevel0 {
     return _.filter(this.creeps, c => { return c.memory.type === 'upgrader' })
   }
 
+  get carriers() {
+    return _.filter(this.creeps, c => { return c.memory.type === 'carrier' })
+  }
+
   build_extensions() {
     if (this.extensions.length >= this.max_extensions) {
       return null
@@ -255,6 +259,12 @@ class RoomLevel3 extends RoomLevel0 {
         console.log('need upgrader')
         console.log(body)
         spawn.spawnCreep(body, `upgrader-${this.room.name}-${Game.time}`, { memory: { type: 'upgrader' } })
+      }
+      if(this.carriers.length < 4 && this.room.energyAvailable > 550 && !spawn.spawning) {
+        let body = bodies.carrier
+        console.log('need carrier')
+        console.log(body)
+        spawn.spawnCreep(body, `carrier-${this.room.name}-${Game.time}`, { memory: { type: 'carrier' } })
       }
     })
 
@@ -517,6 +527,60 @@ class Builder extends BaseCreep {
 module.exports.Builder = Builder
 /* global BaseCreep */
 
+class Carrier extends BaseCreep {
+  constructor(creep) {
+    super(creep)
+  }
+
+  set_task() {
+    if (!this.empty && !this.full && this.has_task) {
+      return this.task
+    } else if (this.full) {
+      if(this.creep.room.energyAvailable < this.creep.room.energyCapacityAvailable) {
+        this.task = 'store'
+        this.target = this.choose_storage()
+      } else {
+        this.task = 'deliver'
+        this.target = this.choose_recipiant()
+      }
+    } else if (this.empty) {
+      this.task = 'collect'
+    } else {
+      this.task = 'collect'
+    }
+  }
+
+  run() {
+    this.set_task()
+    if(this.task === 'collect') {
+      if(!this.target) {
+        this.target = this.choose_energy()
+      }
+      this.pickup()
+    } else if(this.task === 'store') {
+      if(this.target && this.target.store && this.target.store.getFreeCapacity(RESOURCE_ENERGY) <= 0) {
+        this.target = null
+      }
+      if(!this.target) {
+        this.target =  this.choose_storage()
+      }
+      this.transfer()
+    } else if (this.task === 'deliver') {
+      if(this.target && this.target.store && this.target.store.getFreeCapacity(RESOURCE_ENERGY) <= 0) {
+        this.target = null
+      }
+      if(!this.target) {
+        this.target =  this.choose_recipiant()
+      }
+      this.transfer()
+    }
+  }
+
+}
+
+module.exports.Carrier = Carrier
+/* global BaseCreep */
+
 class Miner extends BaseCreep {
   constructor(creep) {
     super(creep)
@@ -608,6 +672,25 @@ class Bodies {
       max = max - 150
       if(max > 0) {
         body = body.concat([WORK, CARRY])
+      }
+    }
+
+    body = _.sortBy(body, _.propertyOf(rank))
+    return body
+  }
+
+  get carrier() {
+    let rank = {
+      WORK: 1,
+      CARRY: 2,
+      MOVE: 3
+    }
+    let max = this.room.energyCapacityAvailable
+    let body = []
+    while (max > 0) {
+      max = max - 150
+      if(max > 0) {
+        body = body.concat([CARRY, MOVE, MOVE])
       }
     }
 
