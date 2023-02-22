@@ -9,6 +9,11 @@ class Bootstrap extends BaseCreep {
     if(this.creep.room.energyAvailable >= this.creep.room.energyCapacityAvailable && this.task === 'store') {
       this.task = null
     }
+
+    if (this.has_static_miners && this.task === 'mine') {
+      this.task = 'collect'
+    }
+
     if (!this.empty && !this.full && this.has_task) {
       return this.task
     } else if (this.full) {
@@ -33,9 +38,7 @@ class Bootstrap extends BaseCreep {
       }
     }
 
-    if (this.has_static_miners && this.task === 'mine') {
-      this.task = 'collect'
-    }
+
   }
 
   run() {
