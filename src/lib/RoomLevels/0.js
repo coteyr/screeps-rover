@@ -76,6 +76,10 @@ class RoomLevel0 {
     return _.filter(this.creeps, c => { return c.memory.type === 'miner' })
   }
 
+  get upgraders() {
+    return _.filter(this.creeps, c => { return c.memory.type === 'upgrader' })
+  }
+
   build_extensions() {
     if (this.extensions.length >= this.max_extensions) {
       return null
