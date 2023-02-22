@@ -92,7 +92,7 @@ class RoomLevel0 {
   need_creeps(spawn, count, type, min_energy, condition) {
     if(this[`${type}s`].length < count && condition && this.room.energyAvailable >= min_energy && !spawn.spawning) {
       let bodies = new Bodies(this.room)
-      let body = bodies[`${type}s`]
+      let body = bodies[`${type}`]
       console.log(`need ${type}`)
       console.log(body)
       spawn.spawnCreep(body, `${type}-${this.room.name}-${Game.time}`, { memory: { type: type } })
