@@ -351,7 +351,7 @@ class BaseCreep {
   }
 
   set target(value) {
-    if(value === null) {
+    if(value === null || value === undefined) {
       this.creep.memory.target = null
     } else {
       this.creep.memory.target = value.id
