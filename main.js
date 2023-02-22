@@ -331,6 +331,7 @@ class BaseCreep {
   }
 
   get has_static_miner() {
+    console.log(this.creep.room.energyCapacityAvailable > 550)
     return this.creep.room.energyCapacityAvailable > 550 //maybe check for miners?
   }
 
