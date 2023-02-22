@@ -49,7 +49,7 @@ class RoomLevel0 {
   }
 
   get has_construction_sites() {
-    return this.construction_sites && this.construction_sites.length > 0
+    return this.construction_sites.length > 0
   }
 
   get structures() {
@@ -68,8 +68,12 @@ class RoomLevel0 {
     return [0, 5, 10, 20, 30, 40, 50, 60][this.room.controller.level - 1]
   }
 
-  get builders(){
+  get builders() {
     return _.filter(this.creeps, c => { return c.memory.type === 'builder' })
+  }
+
+  get miners() {
+    return _.filter(this.creeps, c => { return c.memory.type === 'miner' })
   }
 
   build_extensions() {
