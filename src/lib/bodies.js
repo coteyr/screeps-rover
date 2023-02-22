@@ -26,8 +26,28 @@ class Bodies {
     body = _.sortBy(body, _.propertyOf(rank))
     return body
   }
+
   get miner() {
     return [WORK, WORK, WORK, WORK, WORK, MOVE]
+  }
+
+  get upgrader() {
+    let rank = {
+      WORK: 1,
+      CARRY: 2,
+      MOVE: 3
+    }
+    let max = this.room.energyCapacityAvailable - 50
+    let body = [MOVE]
+    while (max > 0) {
+      max = max - 150
+      if(max > 0) {
+        body = body.concat([WORK, CARRY])
+      }
+    }
+
+    body = _.sortBy(body, _.propertyOf(rank))
+    return body
   }
 }
 

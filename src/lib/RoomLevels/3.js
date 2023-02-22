@@ -3,6 +3,7 @@
 /* global Builder */
 /* global Bodies */
 /* global Miner */
+/* global Upgrader */
 
 class RoomLevel3 extends RoomLevel0 {
   run(room) {
@@ -24,6 +25,9 @@ class RoomLevel3 extends RoomLevel0 {
         break
       case 'miner':
         screep = new Miner(creep)
+        break
+      case 'upgrader':
+        screep = new Upgrader(creep)
         break
       default:
         screep = new Bootstrap(creep)
@@ -53,9 +57,15 @@ class RoomLevel3 extends RoomLevel0 {
       }
       if(this.miners.length < 2 && this.room.energyAvailable >= 550 && !spawn.spawning) {
         let body = bodies.miner
-        console.log('need minder')
+        console.log('need miner')
         console.log(body)
         spawn.spawnCreep(body, `miner-${this.room.name}-${Game.time}`, { memory: { type: 'miner' } })
+      }
+      if(this.upgraders.length < 1 && this.room.energyAvailable > 550 && !spawn.spawning) {
+        let body = bodies.upgrader
+        console.log('need upgrader')
+        console.log(body)
+        spawn.spawnCreep(body, `upgrader-${this.room.name}-${Game.time}`, { memory: { type: 'upgrader' } })
       }
     })
 

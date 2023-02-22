@@ -188,6 +188,7 @@ module.exports.RoomLevel1 = RoomLevel2
 /* global Builder */
 /* global Bodies */
 /* global Miner */
+/* global Upgrader */
 
 class RoomLevel3 extends RoomLevel0 {
   run(room) {
@@ -209,6 +210,9 @@ class RoomLevel3 extends RoomLevel0 {
         break
       case 'miner':
         screep = new Miner(creep)
+        break
+      case 'upgrader':
+        screep = new Upgrader(creep)
         break
       default:
         screep = new Bootstrap(creep)
@@ -238,9 +242,15 @@ class RoomLevel3 extends RoomLevel0 {
       }
       if(this.miners.length < 2 && this.room.energyAvailable >= 550 && !spawn.spawning) {
         let body = bodies.miner
-        console.log('need minder')
+        console.log('need miner')
         console.log(body)
         spawn.spawnCreep(body, `miner-${this.room.name}-${Game.time}`, { memory: { type: 'miner' } })
+      }
+      if(this.upgraders.length < 1 && this.room.energyAvailable > 550 && !spawn.spawning) {
+        let body = bodies.upgrader
+        console.log('need upgrader')
+        console.log(body)
+        spawn.spawnCreep(body, `upgrader-${this.room.name}-${Game.time}`, { memory: { type: 'upgrader' } })
       }
     })
 
@@ -525,6 +535,30 @@ class Miner extends BaseCreep {
 }
 
 module.exports.Miner = Miner
+/* global BaseCreep */
+
+class Miner extends BaseCreep {
+  constructor(creep) {
+    super(creep)
+  }
+
+  set_task() {
+    this.task = 'upgrade'
+  }
+
+  run() {
+    this.set_task()
+    if(this.task === 'upgrade') {
+      if(!this.target) {
+        this.target = this.controller
+      }
+      this.upgradeController()
+    }
+  }
+
+}
+
+module.exports.Miner = Miner
 class Bodies {
 
   constructor(room) {
@@ -553,8 +587,28 @@ class Bodies {
     body = _.sortBy(body, _.propertyOf(rank))
     return body
   }
+
   get miner() {
     return [WORK, WORK, WORK, WORK, WORK, MOVE]
+  }
+
+  get upgrader() {
+    let rank = {
+      WORK: 1,
+      CARRY: 2,
+      MOVE: 3
+    }
+    let max = this.room.energyCapacityAvailable - 50
+    let body = [MOVE]
+    while (max > 0) {
+      max = max - 150
+      if(max > 0) {
+        body = body.concat([WORK, CARRY])
+      }
+    }
+
+    body = _.sortBy(body, _.propertyOf(rank))
+    return body
   }
 }
 
