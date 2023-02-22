@@ -98,7 +98,7 @@ Returns **StructureController** The controller that is in the room the creep is 
 
 ## RoomLevel0
 
-[src/lib/RoomLevels/0.js:7-152][22]
+[src/lib/RoomLevels/0.js:7-156][22]
 
 This is the base class for all Rooms
 
@@ -139,24 +139,24 @@ Returns **any** spawns in a room owned by me
 
 [12]: #spawns
 
-[13]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/creeps/base_creep.js#L8-L124 "Source code on GitHub"
+[13]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/creeps/base_creep.js#L8-L124 "Source code on GitHub"
 
-[14]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
+[14]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/creeps/base_creep.js#L17-L19 "Source code on GitHub"
 
 [15]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[16]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/creeps/base_creep.js#L25-L27 "Source code on GitHub"
+[16]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/creeps/base_creep.js#L25-L27 "Source code on GitHub"
 
-[17]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/creeps/base_creep.js#L33-L35 "Source code on GitHub"
+[17]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/creeps/base_creep.js#L33-L35 "Source code on GitHub"
 
-[18]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/creeps/base_creep.js#L41-L43 "Source code on GitHub"
+[18]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/creeps/base_creep.js#L41-L43 "Source code on GitHub"
 
 [19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[20]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/creeps/base_creep.js#L57-L62 "Source code on GitHub"
+[20]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/creeps/base_creep.js#L57-L62 "Source code on GitHub"
 
-[21]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/creeps/base_creep.js#L49-L51 "Source code on GitHub"
+[21]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/creeps/base_creep.js#L49-L51 "Source code on GitHub"
 
-[22]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/lib/RoomLevels/0.js#L7-L152 "Source code on GitHub"
+[22]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/lib/RoomLevels/0.js#L7-L156 "Source code on GitHub"
 
-[23]: https://github.com/coteyr/screeps-rover/blob/5f0c289fee22f9b71f82a381bf044d53658f3587/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"
+[23]: https://github.com/coteyr/screeps-rover/blob/6008c1c43c2a0c8da1821259afcd5b03d8ce0b0d/src/lib/RoomLevels/0.js#L16-L18 "Source code on GitHub"

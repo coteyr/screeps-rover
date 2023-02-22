@@ -48,6 +48,10 @@ class RoomLevel0 {
     return this.room.find(FIND_MY_CONSTRUCTION_SITES)
   }
 
+  get has_construction_sites() {
+    return this.construction_sites.length > 0
+  }
+
   get structures() {
     return this.room.find(FIND_MY_STRUCTURES)
   }

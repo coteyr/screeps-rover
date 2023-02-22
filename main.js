@@ -48,6 +48,10 @@ class RoomLevel0 {
     return this.room.find(FIND_MY_CONSTRUCTION_SITES)
   }
 
+  get has_construction_sites() {
+    return this.construction_sites.length > 0
+  }
+
   get structures() {
     return this.room.find(FIND_MY_STRUCTURES)
   }
@@ -212,13 +216,13 @@ class RoomLevel3 extends RoomLevel0 {
   run_spawns() {
     let bodies = new Bodies(this.room)
     _.forEach(this.spawns, spawn => {
-      if(this.builders.length < 2 && this.room.energyCapacityAvailable >= 300 && !spawn.spawning) {
+      if(this.builders.length < 2 && this.has_construction_sites && this.room.energyAvailable >= 300 && !spawn.spawning) {
         let body = bodies.builder
         console.log('need builder')
         console.log(body)
         spawn.spawnCreep(body, `builder-${this.room.name}-${Game.time}`, { memory: { type: 'builder' } })
       }
-      if(this.creeps.length < 5 && this.room.energyCapacityAvailable >= 150 && !spawn.spawning) {
+      if(this.creeps.length < 5 && this.room.energyAvailable >= 150 && !spawn.spawning) {
         let body = bodies.bootstrap
         console.log('need bootstrap')
         console.log(body)
