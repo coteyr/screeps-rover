@@ -49,7 +49,7 @@ class RoomLevel0 {
   }
 
   get has_construction_sites() {
-    return this.construction_sites.length > 0
+    return this.construction_sites && this.construction_sites.length > 0
   }
 
   get structures() {
