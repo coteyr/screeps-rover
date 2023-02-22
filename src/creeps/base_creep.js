@@ -102,6 +102,10 @@ class BaseCreep {
     return Math.most_targeting(this.creep.room.find(FIND_MY_CONSTRUCTION_SITES), Game.creeps)
   }
 
+  choose_recipiant() {
+    return Math.fewest_targeting(this.creep.room.find(FIND_MY_CREEPS, {filter: c => {c.energyCapacityAvailable > 49}}), Game.creeps)
+  }
+
   pickup() {
     if(this.creep.pickup(this.target) === ERR_NOT_IN_RANGE) {
       this.moveTo()
