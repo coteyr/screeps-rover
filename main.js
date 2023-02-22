@@ -1,4 +1,5 @@
 /* global Bootstrap */
+/* global Bodies */
 
 /**
  * This is the base class for all Rooms
@@ -82,6 +83,16 @@ class RoomLevel0 {
 
   get carriers() {
     return _.filter(this.creeps, c => { return c.memory.type === 'carrier' })
+  }
+
+  need_creeps(spawn, count, type, min_energy, condition) {
+    if(this[`${type}s`].length < count && condition && this.room.energyAvailable >= min_energy && !spawn.spawning) {
+      let bodies = new Bodies(this.room)
+      let body = bodies[`${type}s`]
+      console.log(`need ${type}`)
+      console.log(body)
+      spawn.spawnCreep(body, `${type}-${this.room.name}-${Game.time}`, { memory: { type: type } })
+    }
   }
 
   build_extensions() {
@@ -194,7 +205,6 @@ module.exports.RoomLevel1 = RoomLevel2
 /* global RoomLevel0 */
 /* global Bootstrap */
 /* global Builder */
-/* global Bodies */
 /* global Miner */
 /* global Upgrader */
 /* global Carrier */
@@ -237,39 +247,14 @@ class RoomLevel3 extends RoomLevel0 {
     this.build_extensions()
   }
 
+
   run_spawns() {
-    let bodies = new Bodies(this.room)
     _.forEach(this.spawns, spawn => {
-      if(this.builders.length < 2 && this.has_construction_sites && this.room.energyAvailable >= 300 && !spawn.spawning) {
-        let body = bodies.builder
-        console.log('need builder')
-        console.log(body)
-        spawn.spawnCreep(body, `builder-${this.room.name}-${Game.time}`, { memory: { type: 'builder' } })
-      }
-      if(this.creeps.length < 5 && this.room.energyAvailable >= 150 && !spawn.spawning) {
-        let body = bodies.bootstrap
-        console.log('need bootstrap')
-        console.log(body)
-        spawn.spawnCreep(body, `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
-      }
-      if(this.miners.length < 2 && this.room.energyAvailable >= 550 && !spawn.spawning) {
-        let body = bodies.miner
-        console.log('need miner')
-        console.log(body)
-        spawn.spawnCreep(body, `miner-${this.room.name}-${Game.time}`, { memory: { type: 'miner' } })
-      }
-      if(this.upgraders.length < 1 && this.room.energyAvailable > 550 && !spawn.spawning) {
-        let body = bodies.upgrader
-        console.log('need upgrader')
-        console.log(body)
-        spawn.spawnCreep(body, `upgrader-${this.room.name}-${Game.time}`, { memory: { type: 'upgrader' } })
-      }
-      if(this.carriers.length < 4 && this.room.energyAvailable > 550 && !spawn.spawning) {
-        let body = bodies.carrier
-        console.log('need carrier')
-        console.log(body)
-        spawn.spawnCreep(body, `carrier-${this.room.name}-${Game.time}`, { memory: { type: 'carrier' } })
-      }
+      this.need_creeps(spawn, 2, 'builder', 300, this.has_construction_sites)
+      this.need_creeps(spawn, 2, 'miner', 550, true)
+      this.need_creeps(spawn, 1, 'upgrader', 550, true)
+      this.need_creeps(spawn, 4, 'carrier', 550, true)
+      this.need_creeps(spawn, 5, 'bootstrap', 150, this.creeps.length < 5)
     })
 
     super.run_spawns()

@@ -1,4 +1,5 @@
 /* global Bootstrap */
+/* global Bodies */
 
 /**
  * This is the base class for all Rooms
@@ -82,6 +83,16 @@ class RoomLevel0 {
 
   get carriers() {
     return _.filter(this.creeps, c => { return c.memory.type === 'carrier' })
+  }
+
+  need_creeps(spawn, count, type, min_energy, condition) {
+    if(this[`${type}s`].length < count && condition && this.room.energyAvailable >= min_energy && !spawn.spawning) {
+      let bodies = new Bodies(this.room)
+      let body = bodies[`${type}s`]
+      console.log(`need ${type}`)
+      console.log(body)
+      spawn.spawnCreep(body, `${type}-${this.room.name}-${Game.time}`, { memory: { type: type } })
+    }
   }
 
   build_extensions() {
