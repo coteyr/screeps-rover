@@ -47,6 +47,12 @@ class RoomLevel3 extends RoomLevel0 {
         console.log(body)
         spawn.spawnCreep(body, `bootstrap-${this.room.name}-${Game.time}`, { memory: { type: 'bootstrap' } })
       }
+      if(this.miners.length < 2 && this.room.energyAvailable >= 550 && !spawn.spawning) {
+        let body = bodies.miner
+        console.log('need minder')
+        console.log(body)
+        spawn.spawnCreep(body, `miner-${this.room.name}-${Game.time}`, { memory: { type: 'miner' } })
+      }
     })
 
     super.run_spawns()

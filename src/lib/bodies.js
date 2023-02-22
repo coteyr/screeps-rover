@@ -26,6 +26,9 @@ class Bodies {
     body = _.sortBy(body, _.propertyOf(rank))
     return body
   }
+  get miner() {
+    return [WORK, WORK, WORK, WORK, WORK, MOVE]
+  }
 }
 
 module.exports.Bodies = Bodies
