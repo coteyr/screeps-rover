@@ -423,6 +423,10 @@ class Bootstrap extends BaseCreep {
         this.task = 'mine'
       }
     }
+
+    if (this.has_static_miners && this.task === 'mine') {
+      this.task = 'collect'
+    }
   }
 
   run() {
