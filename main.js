@@ -569,6 +569,7 @@ class Carrier extends BaseCreep {
     } else if(this.task === 'store') {
       if(this.target && this.target.store && this.target.store.getFreeCapacity(RESOURCE_ENERGY) <= 0) {
         this.target = null
+        this.task = null
       }
       if(!this.target) {
         this.target =  this.choose_storage()
